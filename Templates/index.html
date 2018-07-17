@@ -4,9 +4,82 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <title>My Diary</title>
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
+        <div class="container">
+      
+        <div class="scene scene--card">
+            <div class="form-icon">
+                <button id="signupButton" class="select-button" onclick="signupButton()">Sign in </button><button id="loginButton"class="select-button"  onclick="loginButton()">Sign up</button>
+          </div>
+          <div class="card">
+            <div class="card__face card__face--front">
+      <form>
+          <div class = 'form-icon'>
+        <i class="fa fa-user-plus fa-5x"></i>
+        <h1>Sign up</h1>
+      </div>
+        <div class=" input-wrapper">
+            <label for="fullname"><b>Full-Name</b></label>
+          <input type="text" >
+          <span><i class="fa fa-users"></i></span>
+        </div>
+        
+        <div class=" input-wrapper">
+            <label for="email"><b>Email</b></label>
+          <input type="text" >
+          <span><i class="fa fa-envelope"></i></span>
+        </div>
+      
+        <div class=" input-wrapper">
+            <label for="username"><b>Username</b></label>
+          <input type="text" >
+          <span><i class="fa fa-user"></i></span>
+        </div>
+        <div class=" input-wrapper">
+            <label for="pwd"><b>Password</b></label>
+          <input type="password" >
+          <span><i class="fa fa-key"></i></span>
+        </div>
+        <button class="btn">Submit</button>
+      </form>
+      </div>
+      <div class="card__face card__face--back">
+      <form>
+          <div class = 'form-icon'>
+              <i class="fa fa-user fa-5x"></i>
+              <h1>Log in</h1>
+            </div>
+          <div class=" input-wrapper">
+              <label for="username"><b>Username or Email address</b></label>
+            <input type="text" >
+            <span><i class="fa fa-user"></i></span>
+          </div>
+          <div class=" input-wrapper">
+              <label for="pwd"><b>Password</b></label>
+            <input type="password" >
+            <span><i class="fa fa-key"></i></span>
+          </div>
+          <button class="btn">Submit</button>
+        </form>
+      </div>
+      </div>
+      </div></div>
+        </div>
 
 </body>
+<script>
+        function signupButton(){
+        var card = document.querySelector('.card');
+      card.style.transform =  "rotateY(180deg)";
+      }
+      function loginButton(){
+        var card = document.querySelector('.card');
+      card.style.transform =  "rotateY(0deg)";
+      }
+      
+        </script>
 </html>
