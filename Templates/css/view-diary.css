@@ -1,0 +1,44 @@
+h1 {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 42px;
+        color:#333333;
+    }
+    .time {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 14;
+        font-style: normal;
+        line-height: 17px;
+        color:#80888a;
+        font-weight: 400;
+    }
+    p{
+        
+        font-family: 'Open Sans', sans-serif;
+        font-size: 18;
+        font-style: normal;
+        line-height: 32px;
+        color:#444444;
+        font-weight: 400
+    }
+    .container{
+        width: 55%;
+        margin: 50px auto 0 auto
+    }
+    
+
+.header {
+	height: 50vh;
+	background-image:
+	linear-gradient(to right bottom, 
+	rgba(76, 216, 255, 0.8),
+	rgba(30, 108, 217, 0.2)),
+   url('../images/pen-and-paper.jpg');
+  background-size: cover;
+	background-position: top;
+	position: relative;
+	background-clip: padding-box; 
+	background-color: #F4F9FF
+}
