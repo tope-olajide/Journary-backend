@@ -1,85 +1,122 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-    <title>My Diary</title>
-    <link rel="stylesheet" href="css/style.css">
-  </head>
-  <body>
-        <div class="container">
-      
-        <div class="scene scene--card">
-            <div class="form-icon">
-                <button id="signupButton" class="select-button" onclick="signupButton()">Sign in </button><button id="loginButton"class="select-button"  onclick="loginButton()">Sign up</button>
-          </div>
-          <div class="card">
-            <div class="card__face card__face--front">
-      <form>
-          <div class = 'form-icon'>
-        <i class="fa fa-user-plus fa-5x"></i>
-        <h1>Sign up</h1>
-      </div>
-        <div class=" input-wrapper">
-            <label for="fullname"><b>Full-Name</b></label>
-          <input type="text" >
-          <span><i class="fa fa-users"></i></span>
-        </div>
-        
-        <div class=" input-wrapper">
-            <label for="email"><b>Email</b></label>
-          <input type="text" >
-          <span><i class="fa fa-envelope"></i></span>
-        </div>
-      
-        <div class=" input-wrapper">
-            <label for="username"><b>Username</b></label>
-          <input type="text" >
-          <span><i class="fa fa-user"></i></span>
-        </div>
-        <div class=" input-wrapper">
-            <label for="pwd"><b>Password</b></label>
-          <input type="password" >
-          <span><i class="fa fa-key"></i></span>
-        </div>
-        <button class="btn">Submit</button>
-      </form>
-      </div>
-      <div class="card__face card__face--back">
-      <form>
-          <div class = 'form-icon'>
-              <i class="fa fa-user fa-5x"></i>
-              <h1>Log in</h1>
-            </div>
-          <div class=" input-wrapper">
-              <label for="username"><b>Username or Email address</b></label>
-            <input type="text" >
-            <span><i class="fa fa-user"></i></span>
-          </div>
-          <div class=" input-wrapper">
-              <label for="pwd"><b>Password</b></label>
-            <input type="password" >
-            <span><i class="fa fa-key"></i></span>
-          </div>
-          <button class="btn">Submit</button>
-        </form>
-      </div>
-      </div>
-      </div></div>
-        </div>
+<!DOCTYPE html>
+<html lang="en" >
 
+<head>
+  <meta charset="UTF-8">
+  <title>My Diary</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+      <link rel="stylesheet" href="css/style.css">
+			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+   
+</head>
+
+<body>
+
+<header class="header">		<div id="myNav" class="overlay">
+				<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+				<div class="overlay-content">
+					<a href="#"><i class="fas fa-home fa-1x "></i>Homepage</a>
+					<a href="#"><i class="fas fa-user-circle"></i>User's Profile</a>
+					<a href="#"><i class="fas fa-edit"></i> New Diary</a>
+					<a href="#"><i class="fas fa-book-open"></i>View Diary</a>
+					<a href="#"><i class="fas fa-users"></i>Signup/Signin</a>
+
+
+				</div>
+			</div>
+			<span class="menu-icon" onclick="openNav()"><i class="fas fa-bars"></i> </span>
+			<script>
+					function openNav() {
+							document.getElementById("myNav").style.width = "100%";
+					}
+					
+					function closeNav() {
+							document.getElementById("myNav").style.width = "0%";
+					}
+					</script>
+    <div class="brand-box"> <p class="brand">My Dairy</p></div>
+
+				<div class="container">
+						<div class="form-icon">
+	<button id="loginButton"class="select-button"  onclick="loginButton()">Register</button><button id="signupButton" class="select-button" onclick="signupButton()">Sign in </button>
+			</div>  
+		<div class="scene scene--card">
+
+			<div class="card">
+				<div class="card__face card__face--front">
+	<form>
+			<div class = 'form-icon'>
+		<i class="fa fa-user-plus fa-5x"></i>
+		<h1>Sign up</h1>
+	</div>
+		<div class=" input-wrapper">
+				<label for="fullname"></label>
+			<input type="text" placeholder="Full name" >
+			<span><i class="fa fa-users"></i></span>
+		</div>
+		
+		<div class=" input-wrapper">
+				<label for="email"><b></b></label>
+			<input type="text"placeholder ="Email" >
+			<span><i class="fa fa-envelope"></i></span>
+		</div>
+	
+		<div class=" input-wrapper">
+				<label for="username"><b></b></label>
+			<input type="text" placeholder ="Username">
+			<span><i class="fa fa-user"></i></span>
+		</div>
+		<div class=" input-wrapper">
+				<label for="pwd"><b></b></label>
+			<input type="password"placeholder ="Password" >
+			<span><i class="fa fa-key"></i></span>
+		</div>
+		<button class="btn">Submit</button>
+	</form>
+	</div>
+	<div class="card__face card__face--back">
+	<form>
+			<div class = 'form-icon'>
+					<i class="fa fa-user fa-5x"></i>
+					<h1>Log in</h1>
+				</div>
+			<div class=" input-wrapper">
+					<label for="username"><b>Username or Email address</b></label>
+				<input type="text" >
+				<span><i class="fa fa-user"></i></span>
+			</div>
+			<div class=" input-wrapper">
+					<label for="pwd"><b>Password</b></label>
+				<input type="password" >
+				<span><i class="fa fa-key"></i></span>
+			</div>
+			<button class="btn">Submit</button>
+		</form>
+	</div>
+	</div>
+	</div></div>
+		</div>
+	</header>
 </body>
 <script>
-        function signupButton(){
-        var card = document.querySelector('.card');
-      card.style.transform =  "rotateY(180deg)";
-      }
-      function loginButton(){
-        var card = document.querySelector('.card');
-      card.style.transform =  "rotateY(0deg)";
-      }
-      
-        </script>
+		function signupButton(){
+		var card = document.querySelector('.card');
+	card.style.transform =  "rotateY(180deg)";
+	document.getElementById('signupButton').style.background = 'rgba(0, 0, 0, 0.493)';
+	document.getElementById('loginButton').style.background = 'transparent';
+	}
+	function loginButton(){
+		var card = document.querySelector('.card');
+	card.style.transform =  "rotateY(0deg)";
+	document.getElementById('loginButton').style.background = 'rgba(0, 0, 0, 0.493)';
+	document.getElementById('signupButton').style.background = 'transparent';
+	}
+	
+		</script>
+
+  
+
+</body>
+
 </html>
