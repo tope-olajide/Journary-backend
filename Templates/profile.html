@@ -1,0 +1,225 @@
+<html>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <script src="js/jquery-1.11.0.min.js"></script>
+        <script src="js/jquery.responsiveTabs.js"></script>
+            <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="css/responsive-tabs.css" />
+        <link type="text/css" rel="stylesheet" href="css/resp-style.css" />
+        <link type="text/css" rel="stylesheet" href="css/profile.css" />
+    <body>
+    <div class="header">
+
+    </div><div id="myNav" class="overlay">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div class="overlay-content">
+                <a href="index.html"><i class="fas fa-home fa-1x "></i>Homepage</a>
+                <a href="profile.html"><i class="fas fa-user-circle"></i>User's Profile</a>
+                <a href="add-entry.html"><i class="fas fa-edit"></i> New Diary</a>
+                <a href="view-entry.html"><i class="fas fa-book-open"></i>View Diary</a>
+                <a href="auth-user.html"><i class="fas fa-users"></i>Signup/Signin</a>
+        
+        
+              </div>
+        </div>
+        <span class="menu-icon" onclick="openNav()"><i class="fas fa-bars"></i> </span>
+        <script>
+                function openNav() {
+                        document.getElementById("myNav").style.width = "100%";
+                }
+                
+                function closeNav() {
+                        document.getElementById("myNav").style.width = "0%";
+                }
+                </script>
+        <div class="brand-box"> <p class="brand">My Dairy</p></div></div>
+
+    <div class="flexcontainer">
+        <div class = "profile-info-tab"> 
+            <div class="profile-pic-container">
+            <img class="profile-pic" src="images/avatar.jpg"/></div>
+            <h4 class="profile-name">Jane Doe</h4>
+             <p class="profile-mail">jane.doe@gmail.com</p><p class="profile-username">jane234</p>
+           
+            <table >
+                    <tr>
+                      <th>50</th>
+                      <th>40</th> 
+                      <th>10</th>
+                    </tr>
+                    <tr>
+                      <td>Entries</td>
+                      <td>Private</td> 
+                      <td>public</td>
+                    </tr>
+
+                  </table>
+                  <p class ='profile-about'>Hi ! My name is Jane Doe. I'm a Web designer from Lagos, Nigeria. I enjoy designing cool and  amazing stuff.</p>
+        </div>
+        
+        <div class = "dairy-tab">
+                <div id="responsiveTabsDemo">
+                        <ul>
+                            <li><a href="#tab-1"> My Private Diaries </a></li>
+                            <li><a href="#tab-2"> My Public Diaries </a></li>
+                            <li><a href="#tab-3"> Settings </a></li>
+                        </ul>
+                    
+                        <div id="tab-1"> 
+                            <div class="card-container">
+                            <div class="card">
+                                <img src="images/pic1.jpg" alt="cover-image" style="width:100%">
+                                <div class="card-text-container">
+                                  <h4><b>Lorem ipsum dolor sit amet, conse adipiscing ur  elit</b></h4> 
+                                  <h4>Private<label class="switch">
+                                    <input class="switch-input" type="checkbox" checked />
+                                    <span class="switch-label" data-on="Yes" data-off="No"></span> <span class="switch-handle"></span> </label></h4>
+                                  <p> sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit ame eiusmod tempor incididunt</p> 
+                                </div>
+                              </div>
+                              <div class="card">
+                                <img src="images/portrait.jpg" alt="cover-image" style="width:100%">
+                                <div class="card-text-container">
+                                  <h4>Lorem ipsum dolor sit amet, con adipiscing adipiscing</h4>
+                                  <h4>Private<label class="switch">
+                                        <input class="switch-input" type="checkbox" checked />
+                                        <span class="switch-label" data-on="Yes" data-off="No"></span> <span class="switch-handle"></span> </label></h4> 
+                                  <p> sed do eiusmod tempor incididunt utLorem ipsum dolor adipiscing  amet ad</p> 
+                                </div>
+                              </div>
+                              <div class="card">
+                                <img src="images/reserve-slide1.jpg" alt="cover-image" style="width:100%">
+                                <div class="card-text-container">
+                                  <h4><b>Lorem ipsum dolor sit amet, consectetur  elit amet</b></h4> 
+                                  <h4>Private<label class="switch">
+                                        <input class="switch-input" type="checkbox" checked />
+                                        <span class="switch-label" data-on="Yes" data-off="No"></span> <span class="switch-handle"></span> </label></h4>
+                                  <p> sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet,  tempor incididunt</p> 
+                                </div>
+                              </div>
+                              <div class="card">
+                                    <img src="images/reserve-slide1.jpg" alt="cover-image" style="width:100%">
+                                    <div class="card-text-container">
+                                      <h4><b>Lorem ipsum dolor sit amet, consectetur  elit amet</b></h4> 
+                                      <h4>Private<label class="switch">
+                                            <input class="switch-input" type="checkbox" checked />
+                                            <span class="switch-label" data-on="Yes" data-off="No"></span> <span class="switch-handle"></span> </label></h4>
+                                      <p> sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet,  tempor incididunt</p> 
+                                    </div>
+                                  </div>
+                                  <div class="card">
+                                        <img src="images/revslide.jpg" alt="cover-image" style="width:100%">
+                                        <div class="card-text-container">
+                                          <h4><b>Lorem ipsum dolor sit amet, consectetur  elit amet</b></h4> 
+                                          <h4>Private<label class="switch">
+                                                <input class="switch-input" type="checkbox" checked />
+                                                <span class="switch-label" data-on="Yes" data-off="No"></span> <span class="switch-handle"></span> </label></h4>
+                                          <p> sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet,  tempor incididunt</p> 
+                                        </div>
+                                      </div>
+                                      <div class="card">
+                                            <img src="images/featured2.jpg" alt="cover-image" style="width:100%">
+                                            <div class="card-text-container">
+                                              <h4><b>Lorem ipsum dolor sit amet, consectetur  elit amet</b></h4> 
+                                              <h4>Private<label class="switch">
+                                                    <input class="switch-input" type="checkbox" checked />
+                                                    <span class="switch-label" data-on="Yes" data-off="No"></span> <span class="switch-handle"></span> </label></h4>
+                                              <p> sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet,  tempor incididunt</p> 
+                                            </div>
+                                          </div>
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+
+                        <div id="tab-2"> 
+                            
+
+                                <div class="card-container">
+                                        <div class="card">
+                                            <img src="images/pic1.jpg" alt="cover-image" style="width:100%">
+                                            <div class="card-text-container">
+                                              <h4><b>Lorem ipsum dolor sit amet, conse adipiscing ur  elit</b></h4> 
+                                              <h4>Private<label class="switch">
+                                                <input class="switch-input" type="checkbox"  />
+                                                <span class="switch-label" data-on="Yes" data-off="No"></span> <span class="switch-handle"></span> </label></h4>
+                                              <p> sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit ame eiusmod tempor incididunt</p> 
+                                            </div>
+                                          </div>
+                                          <div class="card">
+                                            <img src="images/portrait.jpg" alt="cover-image" style="width:100%">
+                                            <div class="card-text-container">
+                                              <h4>Lorem ipsum dolor sit amet, con adipiscing adipiscing</h4>
+                                              <h4>Private<label class="switch">
+                                                    <input class="switch-input" type="checkbox"  />
+                                                    <span class="switch-label" data-on="Yes" data-off="No"></span> <span class="switch-handle"></span> </label></h4> 
+                                              <p> sed do eiusmod tempor incididunt utLorem ipsum dolor adipiscing  amet ad</p> 
+                                            </div>
+                                          </div>
+                                          <div class="card">
+                                            <img src="images/reserve-slide1.jpg" alt="cover-image" style="width:100%">
+                                            <div class="card-text-container">
+                                              <h4><b>Lorem ipsum dolor sit amet, consectetur  elit amet</b></h4> 
+                                              <h4>Private<label class="switch">
+                                                    <input class="switch-input" type="checkbox"  />
+                                                    <span class="switch-label" data-on="Yes" data-off="No"></span> <span class="switch-handle"></span> </label></h4>
+                                              <p> sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet,  tempor incididunt</p> 
+                                            </div>
+                                          </div>
+                                          <div class="card">
+                                                <img src="images/reserve-slide1.jpg" alt="cover-image" style="width:100%">
+                                                <div class="card-text-container">
+                                                  <h4><b>Lorem ipsum dolor sit amet, consectetur  elit amet</b></h4> 
+                                                  <h4>Private<label class="switch">
+                                                        <input class="switch-input" type="checkbox"  />
+                                                        <span class="switch-label" data-on="Yes" data-off="No"></span> <span class="switch-handle"></span> </label></h4>
+                                                  <p> sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet,  tempor incididunt</p> 
+                                                </div>
+                                              </div>
+                                              <div class="card">
+                                                    <img src="images/revslide.jpg" alt="cover-image" style="width:100%">
+                                                    <div class="card-text-container">
+                                                      <h4><b>Lorem ipsum dolor sit amet, consectetur  elit amet</b></h4> 
+                                                      <h4>Private<label class="switch">
+                                                            <input class="switch-input" type="checkbox"  />
+                                                            <span class="switch-label" data-on="Yes" data-off="No"></span> <span class="switch-handle"></span> </label></h4>
+                                                      <p> sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet,  tempor incididunt</p> 
+                                                    </div>
+                                                  </div>
+                                                  <div class="card">
+                                                        <img src="images/featured2.jpg" alt="cover-image" style="width:100%">
+                                                        <div class="card-text-container">
+                                                          <h4><b>Lorem ipsum dolor sit amet, consectetur  elit amet</b></h4> 
+                                                          <h4>Private<label class="switch">
+                                                                <input class="switch-input" type="checkbox"  />
+                                                                <span class="switch-label" data-on="Yes" data-off="No"></span> <span class="switch-handle"></span> </label></h4>
+                                                          <p> sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet,  tempor incididunt</p> 
+                                                        </div>
+                                                      </div>
+                                    </div>
+                        </div>
+                        <div id="tab-3"> 
+                            <h2>Notifications Settings</h2>
+                                <form>
+                                        <div class="radio-group">
+                                       <input type="radio" id="option-one" name="selector" checked><label for="option-one">Daily</label><input type="radio" id="option-two" name="selector"><label for="option-two">Weekly</label><input type="radio" id="option-three" name="selector"><label for="option-three">Monthly</label><input type="radio" id="option-four" name="selector"><label for="option-four">Off</label>
+                                         </div>
+                                          </form>
+                        
+                        
+                        </div>
+                    </div>
+        </div>
+</div>
+    </body>
+    <script>
+    $('#responsiveTabsDemo').responsiveTabs({
+        startCollapsed: 'accordion'
+    });</script>
+</html>
