@@ -12,7 +12,7 @@ body {
 	  linear-gradient(to right bottom, 
      rgba(76, 216, 255, 0.8),
      rgba(30, 108, 217, 0.8)),
-     url('https://images.pexels.com/photos/213399/pexels-photo-213399.jpeg');
+     url('../images/diary2.jpg');
   	
 	background-size: cover;
   	background-position: top;
@@ -227,4 +227,8 @@ form {
   .flexcontainer {
 	  display: flex;
 	  flex-direction: row;
-  }
+	}
+	
+	@media screen and (max-height: 450px) {
+
+		}
