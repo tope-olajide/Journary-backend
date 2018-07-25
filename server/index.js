@@ -39,9 +39,46 @@ app.get('/entries', (req, res) => {
 
 app.get('/entries/:id', (req, res) => {
   const id = req.params.id;
+
+  /**
+   * Register New User
+   * @param {Object} age request object
+   * @param {Object} res response object
+   *
+   * @returns {response} Response object
+   */
+  function checkId(user) {
+    return user.id == id;
+  }
+  /**
+   * Register New User
+   * Route: POST: /users/signup
+   *
+   * @param {Object} req request object
+   * @param {Object} res response object
+   *
+   * @returns {response} Response object
+   */
+  function findId() {
+    return diaryDB.find(checkId);
+  }
+  if (findId()) {
+    res.json(findId());
+  } else {
+    res.status(404).end();
+  }
+});
+app.post('/entries', (req, res) => {
+  const id = req.body.id;
+  const title = req.body.title;
+  const entry = req.body.entry;
+
+  diaryDB.push({ id, title, entry });
+  res.json(diaryDB);
 });
 
 // API server listing port 3000
 app.listen(3000, () => {
   console.log('We are live on port 3000');
 });
+
