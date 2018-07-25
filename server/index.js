@@ -39,7 +39,7 @@ app.get('/entries', (req, res) => {
 
 app.get('/entries/:id', (req, res) => {
   const id = req.params.id;
-
+});
 
 // API server listing port 3000
 app.listen(3000, () => {
