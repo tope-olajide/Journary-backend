@@ -77,8 +77,21 @@ app.post('/entries', (req, res) => {
   res.json(diaryDB);
 });
 
+app.put('/entries/:id', (req, res) => {
+  const id = req.params.id;
+  const title = req.body.title;
+  const entry = req.body.entry;
+  const newId = id - 1;
+  if (diaryDB[newId]) {
+    diaryDB[newId].id = id;
+    diaryDB[newId].title = title;
+    diaryDB[newId].entry = entry;
+    res.json(diaryDB[newId]);
+  } else {
+    res.status(404).end();
+  }
+});
 // API server listing port 3000
 app.listen(3000, () => {
   console.log('We are live on port 3000');
 });
-
