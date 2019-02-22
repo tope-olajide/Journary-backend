@@ -13,8 +13,7 @@ body {
 	linear-gradient(to right bottom, 
 	rgba(76, 216, 255, 0.8),
 	rgba(30, 108, 217, 0.2)),
-   url('../images/pen-and-paper.jpg');
-	
+   url('../images/pen-and-paper.jpg');	
   background-size: cover;
 	background-position: top;
 	position: relative;
