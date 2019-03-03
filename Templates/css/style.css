@@ -60,6 +60,39 @@ color: blueviolet
 	clip-path: polygon(0 0, 100% 0, 100% 100vh, 0 100%);
 	background-color: #F4F9FF
 }
+/* Style the search field */
+form.search-bar input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+/* Style the submit button */
+form.search-bar button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+
+form.search-bar button:hover {
+  background: #0b7dda;
+}
+
+/* Clear floats */
+form.search-bar::after {
+  content: "";
+  clear: both;
+  display: table;
+}
 .sub-header {
     grid-column-start: 1;
     grid-column-end: 4;
