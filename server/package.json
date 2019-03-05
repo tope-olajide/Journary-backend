@@ -10,7 +10,6 @@
   "keywords": [],
   "author": "Temitope Olajide",
   "license": "ISC",
-
   "devDependencies": {
     "babel-eslint": "^8.2.6",
     "babel-plugin-add-module-exports": "^0.2.1",
