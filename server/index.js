@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import morgan from 'morgan';
+import routes from './routes';
 import logger from './helpers/logger';
 
 const app = express();
@@ -15,21 +15,28 @@ app.use(bodyParser.json(), bodyParser.urlencoded({
   extended: false,
 }));
 
-app.use(morgan('dev', {
-  skip(req, res) {
-    return res.statusCode < 400;
-  },
-  stream: process.stderr,
-}));
 
-app.use(morgan('dev', {
-  skip(req, res) {
-    return res.statusCode >= 400;
-  },
-  stream: process.stdout,
-}));
+app.use('/api/', routes);
+app.get('/', (req, res) => {
+  res.status(201).json({
+    title: 'BisLink',
+    message: 'Welcome to bisLink Homepage!'
+  });
+});
 
+app.get('*', (req, res) => {
+  res.status(404).send({
+    success: false,
+    message: 'invalid link'
+  });
+});
 
-app.listen(port, () => logger.info(`Server started on port ${port}`));
+app.post('*', (req, res) => {
+  res.status(404).send({
+    success: false,
+    message: 'invalid link'
+  });
+});
+app.listen(port, () => logger.info(`We're up and running on port ${port}`));
 
 export default app;
