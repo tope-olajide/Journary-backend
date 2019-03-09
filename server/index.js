@@ -1,14 +1,12 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import dotenv from 'dotenv';
 import routes from './routes';
 import logger from './helpers/logger';
 
 const app = express();
-
-const port = parseInt(process.env.PORT, 10) || 9000;
-
-
+dotenv.config();
 app.use(cors());
 
 app.use(bodyParser.json(), bodyParser.urlencoded({
@@ -19,8 +17,8 @@ app.use(bodyParser.json(), bodyParser.urlencoded({
 app.use('/api/', routes);
 app.get('/', (req, res) => {
   res.status(201).json({
-    title: 'BisLink',
-    message: 'Welcome to bisLink Homepage!'
+    title: 'My-Diary',
+    message: 'Welcome to My-Diary App!'
   });
 });
 
@@ -37,6 +35,7 @@ app.post('*', (req, res) => {
     message: 'invalid link'
   });
 });
+const port = 9000;
 app.listen(port, () => logger.info(`We're up and running on port ${port}`));
 
 export default app;
