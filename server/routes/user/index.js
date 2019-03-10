@@ -7,5 +7,5 @@ const user = express.Router();
 
 
 user.post('/signup', User.signupUser);
-
+user.post('/signin', User.signInUser);
 export default user;
