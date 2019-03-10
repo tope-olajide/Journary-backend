@@ -77,4 +77,41 @@ export default class User {
       return res.status(400).send(error);
     }
   }
+
+  static async signInUser(req, res) {
+    const authName = req.body.usernameOrEmail;
+    const text = 'SELECT * FROM users WHERE username = $1 OR email =$1';
+    const values = [authName];
+    try {
+      const { rows } = await db.query(text, values);
+      const result = rows[0];
+      if (!result) {
+        return res.status(401).json({
+          success: false,
+          message: 'user not found'
+        });
+      }
+      if (newEncryption.verifyHash(req.body.password, result.password)) {
+        const token = jsonwebtoken.sign({
+          userid: result.userid,
+          username: result.username,
+          expiresIn: '24h'
+        }, 'config.jwtSecret');
+        return res.status(200).json({
+          success: true,
+          message: 'User Signed In/token generated!',
+          token
+        });
+      }
+      res.status(401).json({
+        success: false,
+        message: 'Invalid pasword!'
+      });
+    } catch (error) {
+      return res.status(400).res.status(500).json({
+        success: false,
+        message: 'An error occured'
+      });
+    }
+  }
 }
