@@ -2,7 +2,7 @@
 /* eslint-disable require-jsdoc */
 import jsonwebtoken from 'jsonwebtoken';
 import db from '../db';
-import { validateUser } from '../middleware/validator';
+import { validateUser,validateModifiedUser } from '../middleware/validator';
 import Encryption from '../middleware/encryption';
 
 
@@ -114,4 +114,47 @@ export default class User {
       });
     }
   }
+
+  static async modifyUser({
+    body,
+    user
+  }, res) {
+    const userId = user.userid;
+    const username = user.username;
+    const {
+      fullname,
+      email,
+      about,
+      image
+    } = body;
+    const validateUserDetails = validateModifiedUser({
+      fullname,
+      email
+    });
+    if (validateUserDetails) {
+      return res.status(400).json({
+        success: false,
+        message: validateUserDetails
+      });
+    }
+    const findUserQuery = 'SELECT * FROM users WHERE id=$1';
+    const updateUserQuery= 'UPDATE users SET fullname=$1,email=$2,about=$3,image=$4, returning *';
+    try {
+      const { rows } = await db.query(findOneQuery, [userId]);
+      if(!rows[0]) {
+        return res.status(404).json({
+          success: false,
+          message: 'User not found'
+        });
+      }
+      const values = [
+        fullname||rows[0].fullname,
+        email||rows[0].email,
+        about||rows[0].about,
+        image||rows[0].image,
+      ]
+      const response = await db.query(findUserQuery, updateUserQuery);
+  }
+  
+}
 }
