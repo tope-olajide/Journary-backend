@@ -7,10 +7,11 @@ export default {
     CREATE TABLE IF NOT EXISTS users (
       userId SERIAL PRIMARY KEY,
       email TEXT NOT NULL UNIQUE,
-      fullname TEXT NOT NULL UNIQUE,
-      username VARCHAR(255) NOT NULL,
+      fullname TEXT NOT NULL,
+      about TEXT NOT NULL,
+      username VARCHAR(255) NOT NULL UNIQUE,
       password VARCHAR(255) NOT NULL,
-      imageUrl TEXT,
+      image TEXT,
       view INTEGER DEFAULT 0
     );
     `;
