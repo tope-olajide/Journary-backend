@@ -120,12 +120,11 @@ export default class User {
     user
   }, res) {
     const userId = user.userid;
-    const username = user.username;
     const {
       fullname,
       email,
       about,
-      image
+    image
     } = body;
     const validateUserDetails = validateModifiedUser({
       fullname,
@@ -140,7 +139,7 @@ export default class User {
     const findUserQuery = 'SELECT * FROM users WHERE id=$1';
     const updateUserQuery= 'UPDATE users SET fullname=$1,email=$2,about=$3,image=$4, returning *';
     try {
-      const { rows } = await db.query(findOneQuery, [userId]);
+      const { rows } = await db.query(findUserQuery, [userId]);
       if(!rows[0]) {
         return res.status(404).json({
           success: false,
@@ -153,8 +152,19 @@ export default class User {
         about||rows[0].about,
         image||rows[0].image,
       ]
-      const response = await db.query(findUserQuery, updateUserQuery);
+      const response = await db.query(updateUserQuery, values);
+      return res.status(200).json({
+        success: true,
+        message: 'User record updated',
+        response: response.row[0]
+      });
   }
+  catch(error) {
+    return res.status(500).json({
+      success: false,
+      message: "Error Updating user's profile",
+      error
+    })
   
 }
 }
