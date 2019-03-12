@@ -138,4 +138,30 @@ export default class Entry {
       return res.status(400).send(error);
     }
   }
+
+  static async getEntry({
+    params,
+    user
+  }, res) {
+    const userId = user.userid;
+    const { entryId } = params;
+    const text = 'SELECT * FROM entries WHERE entryId = $1';
+    try {
+      const { rows } = await db.query(text, [entryId]);
+      if (!rows[0]) {
+        return res.status(200).json({
+          success: true,
+          message: 'diary not found',
+          dairy: []
+        });
+      }
+      return res.status(200).json({
+        success: true,
+        message: 'Diary found',
+        diary: rows[0]
+      });
+    } catch (error) {
+      return res.status(400).send(error);
+    }
+  }
 }
