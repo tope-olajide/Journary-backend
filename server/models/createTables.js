@@ -11,7 +11,7 @@ export default {
       about TEXT NOT NULL,
       username VARCHAR(255) NOT NULL UNIQUE,
       password VARCHAR(255) NOT NULL,
-      image TEXT,
+      userImageUrl TEXT,
       view INTEGER DEFAULT 0
     );
     `;
@@ -23,10 +23,12 @@ export default {
     CREATE TABLE IF NOT EXISTS entries (
       entryId SERIAL PRIMARY KEY,
       userId INTEGER REFERENCES users(userId),
+      entryImageUrl TEXT,
       title TEXT NOT NULL,
+      isPrivate BOOLEAN DEFAULT TRUE NOT NULL,
       content TEXT NOT NULL,
       created_at TIMESTAMP (0) without time zone default now(),
-      updated_at TIMESTAMP  
+      updated_at TIMESTAMP
     );
     `;
     return database.query(entriesSchema);
