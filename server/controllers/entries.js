@@ -164,4 +164,33 @@ export default class Entry {
       return res.status(400).send(error);
     }
   }
+
+  static async getUserPrivateEntries({
+    params,
+    user
+  }, res) {
+    const userId = user.userid;
+    const { entryId } = params;
+    const text = 'SELECT * FROM entries WHERE isPrivate = $1 and userId =$2';
+    const values = [
+      true, userId
+    ];
+    try {
+      const { rows } = await db.query(text, values);
+      if (!rows[0]) {
+        return res.status(200).json({
+          success: true,
+          message: 'diary not found',
+          dairy: []
+        });
+      }
+      return res.status(200).json({
+        success: true,
+        message: 'Diary found',
+        diary: rows[0]
+      });
+    } catch (error) {
+      return res.status(400).send(error);
+    }
+  }
 }
