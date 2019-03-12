@@ -2,7 +2,7 @@
 /* eslint-disable require-jsdoc */
 import jsonwebtoken from 'jsonwebtoken';
 import db from '../db';
-import { validateUser,validateModifiedUser } from '../middleware/validator';
+import { validateUser, validateModifiedUser } from '../middleware/validator';
 import Encryption from '../middleware/encryption';
 
 
@@ -124,7 +124,7 @@ export default class User {
       fullname,
       email,
       about,
-    image
+      image
     } = body;
     const validateUserDetails = validateModifiedUser({
       fullname,
@@ -137,34 +137,33 @@ export default class User {
       });
     }
     const findUserQuery = 'SELECT * FROM users WHERE id=$1';
-    const updateUserQuery= 'UPDATE users SET fullname=$1,email=$2,about=$3,image=$4, returning *';
+    const updateUserQuery = 'UPDATE users SET fullname=$1,email=$2,about=$3,image=$4, returning *';
     try {
       const { rows } = await db.query(findUserQuery, [userId]);
-      if(!rows[0]) {
+      if (!rows[0]) {
         return res.status(404).json({
           success: false,
           message: 'User not found'
         });
       }
       const values = [
-        fullname||rows[0].fullname,
-        email||rows[0].email,
-        about||rows[0].about,
-        image||rows[0].image,
-      ]
+        fullname || rows[0].fullname,
+        email || rows[0].email,
+        about || rows[0].about,
+        image || rows[0].image,
+      ];
       const response = await db.query(updateUserQuery, values);
       return res.status(200).json({
         success: true,
         message: 'User record updated',
         response: response.row[0]
       });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: "Error Updating user's profile",
+        error
+      });
+    }
   }
-  catch(error) {
-    return res.status(500).json({
-      success: false,
-      message: "Error Updating user's profile",
-      error
-    })
-  
-}
 }

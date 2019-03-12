@@ -135,25 +135,12 @@ export const validateUser = ({
   }
   return false;
 };
-export const validateBusiness = ({ businessName, businessAddress1, businessDescription })=> {
-  if (!businessName || businessName.length < 5) {
+export const validateEntry = ({ title, content })=> {
+  if (!title || title.length < 5) {
     return 'title must be more than 5 charachers';
   }
-  if (!businessAddress1 || businessAddress1.length < 5) {
-    return 'address length is too small';
-  }
-  if (!businessDescription || businessDescription.length < 10) {
-    return 'Description is too small';
-  }
-  return false;
-};
-export const validateReview = ({title, content}) => {
-    
-  if (!title) {
-    return 'Please input a valid review title';
-  }
-  if (!content) {
-    return 'Please input a valid review contents';
+  if (!content || content.length < 10) {
+    return 'entry is too small';
   }
   return false;
 };
