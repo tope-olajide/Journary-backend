@@ -222,4 +222,26 @@ export default class Entry {
       return res.status(400).send(error);
     }
   }
+
+  static async getAllPublicEntries(req, res) {
+    const text = 'SELECT * FROM entries WHERE isPrivate =$1';
+    const values = [false];
+    try {
+      const { rows } = await db.query(text, values);
+      if (!rows[0]) {
+        return res.status(200).json({
+          success: false,
+          message: 'diary not found',
+          dairy: []
+        });
+      }
+      return res.status(200).json({
+        success: true,
+        message: 'Diaries found',
+        diary: rows[0]
+      });
+    } catch (error) {
+      return res.status(400).send(error);
+    }
+  }
 }
