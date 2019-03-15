@@ -85,7 +85,6 @@ color: blueviolet
 
 }
 .avatar{
-margin-right: 35px;
  display: flex;
 }
 .avatar p{
@@ -97,35 +96,96 @@ margin-right: 15px;
   width:50px;
   border-radius: 50%
 }
-#search-form{
-display: flex
-}
+
 .top-nav-container{
 margin-top:0px;
   display: flex;
   justify-content: space-between;
-  align-items: center
-
+  align-items: center;
+  flex-wrap: wrap
 }
-/* Style the search field */
+.menu-icon{
+  display: none;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.bar1, .bar2, .bar3{
+    width: 35px;
+    height: 5px;
+    background-color: white;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+/* Rotate first bar */
+.change .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px) ;
+  transform: rotate(-45deg) translate(-9px, 6px) ;
+}
+
+/* Fade out the second bar */
+.change .bar2 {
+  opacity: 0;
+}
+
+/* Rotate last bar */
+.change .bar3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px) ;
+  transform: rotate(45deg) translate(-8px, -8px) ;
+}
+.close-btn{
+  position: absolute;
+  right: 0;
+  padding-right: 100px;
+  padding-top: 50px;
+  
+}
+.close-btn p{
+  font-weight: 900;
+  font-size: 20px;
+  cursor: pointer;
+}
+.hide_search-overlay{
+  height: 0px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 1s linear
+}
+.search-overlay{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: rgba(0,0,0,0.8);
+  z-index: 5;
+  display: flex;justify-content: center;
+  visibility: visible;
+  opacity: 1;
+  transition:opacity 1s linear
+}
+#search-form{
+  display: flex;
+  align-items: center;
+  opacity: 1;
+  }
 form.search-bar input[type=text] {
-  padding: 10px;
+  padding: 20px;
   font-size: 17px;
   border: 1px solid grey;
-  width: 500px;
-  background:white
+  width: 400px;
+  background:white;
+  border-radius: 2px;
 }
 
 /* Style the submit button */
 form.search-bar button {
-  width: 100px;
-  padding: 10px;
+  margin-left: -5px;
+  width: 120px;
+  padding: 20px;
   background:rgb(110, 158, 207);
   color: white;
   font-size: 17px;
   border: 1px solid grey;
   border-left: none; /* Prevent double borders */
-  cursor: pointer;
+  cursor: pointer;border-radius: 2px;
 }
 
 form.search-bar button:hover {
@@ -194,7 +254,7 @@ object-fit: cover;
 .modal {
     display: none; 
     position: fixed; 
-    z-index: 1; 
+    z-index: 5; 
     padding-top: 100px; 
     left: 0;
     top: 0;
@@ -218,6 +278,7 @@ object-fit: cover;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s
+    
   }
   
   /* Add Animation */
@@ -233,7 +294,7 @@ object-fit: cover;
   
   /* The Close Button */
   .close {
-    color: white;
+    color: rgb(31, 28, 28);
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -241,18 +302,19 @@ object-fit: cover;
   
   .close:hover,
   .close:focus {
-    color: #000;
+    color: rgb(238, 68, 68);
     text-decoration: none;
     cursor: pointer;
   }
   
   .modal-header {
     padding: 2px 16px;
-    background-color: #918ff5;
-    color: white;
+    background-color: #ffffff;
+    color: rgb(37, 32, 32);
+    border-bottom: 1px solid rgb(71, 119, 250)
   }
   
-  .modal-body {padding: 2px 16px;}
+  .modal-body {padding: 2px 16px; color:blue}
   
   .modal-footer {
     padding: 2px 16px;
@@ -260,9 +322,53 @@ object-fit: cover;
     color: white;
   }
 
-
-
-
+.login-form input[type=text],input[type=password]{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid rgb(33, 128, 236);
+  border-radius: 0px;
+}
+.login-form input::placeholder{
+color: blue
+}
+.login-form input[type=submit]{
+  background-color:rgb(61, 80, 147);
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  width: 100%
+}
+.signup-header {
+  padding: 2px 6px;
+  text-align: center;
+  background-color:  rgb(108, 105, 163);
+  color: rgb(246, 251, 252);
+  border-bottom: 1px solid rgb(61, 80, 147)
+}
+.signup-form{
+  display: none;
+  width: 400px;
+  float: right;
+  margin-right: 10px;
+  background-color: white;
+  padding:5px 5px 5px 5px;
+  border: 2px solid rgb(61, 80, 147);
+}
+.signin-form{
+  display: none;
+  margin-top: 3px;
+  width: 400px;
+  float: right;
+  margin-right: 10px;
+  background-color: white;
+  padding:7px 7px 7px 7px;
+  border: 2px solid rgb(61, 80, 147);
+}
 
 
 
@@ -409,12 +515,12 @@ z-index: 2;
     height: 100%;
     object-fit: cover;
 }
-.tile:nth-child(1){
+.tile:nth-child(4n+1){
     grid-column: span 1;
     grid-row: span 2;
 }
 
-.tile:nth-child(2){
+/* .tile:nth-child(2){
     grid-column: span 1;
     grid-row: span 1
 }
@@ -430,12 +536,57 @@ z-index: 2;
 .tile:nth-child(5){
     grid-column: span 1;
     grid-row: span 2;
-}
+} */
 
 
 @media screen and (max-width: 650px){
+
+body{
+    width: 100%;
+    margin: auto;
+
+}
+form.search-bar input[type=text] {
+  width: 50%;
+ }
+
+/* Style the submit button */
+form.search-bar button {
+  width: 100px;
+}
+  .top-nav-container{
+    margin-top:0px;
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    }
+    .logo{
+      display: flex
+    }
+    .logo h1{
+      color:white;
+      text-align: left
+    }
+    .menu-icon{
+display: block;
+
+    }
+    .topnav {
+      display: none;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 1s linear
+      }
+      .show-topnav{
+        display: flex;
+        flex-direction: column;
+        margin-right: auto;
+        visibility: visible;
+        opacity: 1;
+        transition:opacity 1s linear
+      }
     .entries-container{
-        display: block;
+        display: flex;
+        flex-direction: column
     }
     .tile{
         margin-bottom: 1rem;
@@ -492,3 +643,5 @@ height: 400px;
 position: relative;
 object-fit: cover;
 }
+
+
