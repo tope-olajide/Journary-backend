@@ -2,99 +2,203 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>My Dairy</title>
-    <link rel="stylesheet" href="css/style.css">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+  <meta charset="UTF-8">
+  <title>My Dairy</title>
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 </head>
 <link rel="stylesheet" href="css/style.css">
 
 <body>
 
-        <div class="header">
-          <div class="auth-header">
-            <div class="logo"><h1>MY-DIARY</h1></div> 
-            <div class="auth-nav">
-                <a href="#home" id="login" class="">Login</a>
-                <a href="#news">Sign Up</a>
-            </div>            
+  <div class="header">
+    <div class="auth-header">
+      <div class="logo">
+        <h1>MY-DIARY</h1>
+      </div>
+      <div class="auth-nav">
+        <a href="#home" id="login" onclick="login()" class="">Login</a>
+        <a href="#news" id="signUp"onclick="signUp()">Sign Up</a>
+      </div>
+    </div>
+<div class="signin-form">
+
+        <div class="signup-header">
+            <h2>Sign In</h2>
           </div>
-            
+          <form class="login-form">
+            <br><br>
+          Username:<br>
+          <input type="text" name="firstname"><br>
+          Password:<br>
+          <input type="password" name="lastname">
+          <input type="submit" value="Submit">
+        </form>
+</div>
 
-
+<div class="signup-form">
+  <form class="login-form">
+      <div class="signup-header">
+          <h2>Sign Up</h2>
         </div>
-       
-    <!--     <div class="sub-header"> What are you writing for?
+      <input type="text" name="firstname" placeholder="First name"><br>
+      
+      <input type="text" name="lastname"placeholder="Last name">
+      
+      <input type="text" name="lastname" placeholder="Username">
+      
+      <input type="text" name="lastname" placeholder="Email">
+      
+      <input type="password" name="lastname" placeholder="Password">
+      
+      <input type="password" name="lastname"placeholder="Repeat Password">
+      <input type="submit" value="Submit">
+    </form>
+</div>
+
+  </div>
+
+  <!--     <div class="sub-header"> What are you writing for?
             Whether you’re looking for a tool to record your daily emotions and activities in a reflective journal,
             keep track of milestones in a food diary or pregnancy journal, or even record your dreams in a dream
             journal, Penzu has you covered.
             Penzu gives you all the tools you need to focus on the ideas you want to preserve, rather than the process
             of writing itself.
-        </div> --> 
-        <div class="grid-container">
-        <div class="main">
-            <h1>Express yourself with pictures and words.
-                Keep a journal of your daily activities, your travel, exercise, diet, or thoughts and prayers</h1>
+        </div> -->
+  <div class="grid-container">
+    <div class="main">
+      <h1>Express yourself with pictures and words.
+        Keep a journal of your daily activities, your travel, exercise, diet, or thoughts and prayers</h1>
+    </div>
+    <div class="main "><img src="./images/featured2.jpg">
+      <div class="overlay-color"></div>
+    </div>
+    <div class="main"><img src="./images/pic1.jpg">
+      <div class="overlay-color"></div>
+    </div>
+    <div class="main">
+      <h1>Express yourself with pictures and words.
+        Keep a journal of your daily activities, your travel, exercise, diet, or thoughts and prayers</h1>
+    </div>
+    <div class="main">
+      <h1>Express yourself with pictures and words.
+        Keep a journal of your daily activities, your travel, exercise, diet, or thoughts and prayers</h1>
+    </div>
+    <div class="main"><img src="./images/reserve-slide1.jpg">
+      <div class="overlay-color"></div>
+    </div>
+    <div class="main"><img src="./images/revslide.jpg">
+      <div class="overlay-color"></div>
+    </div>
+    <div class="main">
+      <h1>Express yourself with pictures and words.
+        Keep a journal of your daily activities, your travel, exercise, diet, or thoughts and prayers</h1>
+    </div>
+    <div id="loginModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <h2>Sign in</h2>
         </div>
-        <div class="main "><img src="./images/featured2.jpg"><div class="overlay-color"></div></div>
-        <div class="main"><img src="./images/pic1.jpg"><div class="overlay-color"></div></div>
-        <div class="main">
-            <h1>Express yourself with pictures and words.
-                Keep a journal of your daily activities, your travel, exercise, diet, or thoughts and prayers</h1>
+        <div class="modal-body">
+          <form class="login-form">
+              <br><br>
+            Username:<br>
+            <input type="text" name="firstname"><br>
+            Password:<br>
+            <input type="password" name="lastname">
+            <input type="submit" value="Submit">
+          </form><br /><br>
         </div>
-        <div class="main">
-            <h1>Express yourself with pictures and words.
-                Keep a journal of your daily activities, your travel, exercise, diet, or thoughts and prayers</h1>
+
+      </div>
+    </div>
+
+    <div id="signUpModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Sign Up</h2>
+          </div>
+          <div class="modal-body">
+            <form class="login-form">
+              <input type="text" name="firstname" placeholder="First name"><br>
+              
+              <input type="text" name="lastname"placeholder="Last name">
+              
+              <input type="text" name="lastname" placeholder="Username">
+              
+              <input type="text" name="lastname" placeholder="Email">
+              
+              <input type="password" name="lastname" placeholder="Password">
+              
+              <input type="password" name="lastname"placeholder="Repeat Password">
+              <input type="submit" value="Submit">
+            </form><br />
+          </div>
+  
         </div>
-        <div class="main"><img src="./images/reserve-slide1.jpg"><div class="overlay-color"></div></div>
-        <div class="main"><img src="./images/revslide.jpg"><div class="overlay-color"></div></div>
-        <div class="main">
-            <h1>Express yourself with pictures and words.
-                Keep a journal of your daily activities, your travel, exercise, diet, or thoughts and prayers</h1>
-        </div>
-        <div id="modal" class="modal">
-                <!-- Modal content -->
+      </div>
+
+    <!--           <div id="modal" class="modal">
+                
                 <div class="modal-content">
                   <div class="modal-header">
                     <span class="close">&times;</span>
                     <h2>Modal Header</h2>
                   </div>
                   <div class="modal-body">
-                    <p>Some text in the Modal Body</p>
-                    <p>Some other text...</p>
+                    <form class="login-form">
+                      First name:<br>
+                      <input type="text" name="firstname"><br>
+                      Last name:<br>
+                      <input type="text" name="lastname">
+                    </form>
                   </div>
                   <div class="modal-footer">
-                    <h3>Modal Footer</h3>
+                    <input type="submit">
                   </div>
                 </div>
-              </div>
+              </div> -->
 
-    </div>
-    <script>
-       
-            var modal = document.getElementById('modal');
-           
-            var login = document.getElementById("login");
-            
-            var span = document.getElementsByClassName("close")[0];
-            
-            login.onclick = function() {
-              modal.style.display = "block";
-            }
-            
-            span.onclick = function() {
-              modal.style.display = "none";
-            }
-            
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
-              if (event.target == modal) {
-                modal.style.display = "none";
-              }
-            }
-            </script>
+  </div>
+  <script>
+    function login(){
+    var signIn = document.querySelector('.signin-form');
+    var signUp = document.querySelector(".signup-form")
+    if (signIn.style.display === "block") {
+      signIn.style.display = "none";
+      signUp.style.display = "none";
+  } else {
+    signUp.style.display = "none";
+    signIn.style.display = "block";
+  }
+    }
+
+    function signUp(){
+      var signIn = document.querySelector('.signin-form');
+    var signUp = document.querySelector(".signup-form")
+    if (signUp.style.display === "block") {
+      signUp.style.display = "none";
+      signIn.style.display = "none";
+  } else {
+    signIn.style.display = "none";
+    signUp.style.display = "block";
+  }
+    }
+   
+
+
+
+
+    
+
+  </script>
   <footer class="footer">
-      <p class=" ">Copyright © 2018 BisLink. All rights reserved | Designed with <i class="fas fa-heart fa-lg"></i> by <a href="https://github.com/tope-olajide">Temitope</a> </p>
+    <p class=" ">Copyright © 2018 BisLink. All rights reserved | Designed with <i class="fas fa-heart fa-lg"></i> by <a
+        href="https://github.com/tope-olajide">Temitope</a> </p>
   </footer>
 </body>
 
