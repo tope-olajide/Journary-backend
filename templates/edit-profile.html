@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>My Dairy</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+  crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+</head>
+
+<div class="header-container">
+    <div class="top-nav-container">
+    <div class="logo"><h1>MY-DIARY</h1>
+    
+    </div>
+    <div class="menu-icon" onclick="toggleBar(this);"><div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div></div>
+    <div class="topnav">
+            <a href="homepage.html" class="active"><i class="fas fa-home"></i> Home</a>
+            <a href="#" onclick="displaySearchForm()"><i class="fas fa-search"></i> Search</a>
+            <a href="add-entry.html"><i class="fas fa-edit"></i> New</a>
+            <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+            <a href="private.html"><i class="fas fa-lock"></i> Private </a>
+            <a href="public.html"<i class="fas fa-lock-open"></i> Public</a>
+            <a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div> 
+    </div></div>
+
+<div class="profile-header">
+        <div class="edit-profile-form">
+                <form class="login-form">
+                    <div class="edit-profile-header">
+                        <h2>Edit Profile</h2>
+                      </div>
+                    <input type="text" name="firstname" placeholder="First name"><br>
+                    
+                    <input type="text" name="lastname"placeholder="Last name">
+                    
+                    <input type="text" name="lastname" placeholder="Username">
+                    
+                    <input type="text" name="lastname" placeholder="Email">
+                    
+                    <input type="file" class="text-area">
+                    
+                    <textarea class="text-area" placeholder="About me..." rows="4"></textarea>
+                    <input type="submit" value="Submit">
+                  </form>
+              </div>
+</div>
+</body>
+<footer class="footer">
+    <p class=" ">Copyright © 2018 BisLink. All rights reserved | Designed with <i class="fas fa-heart fa-lg"></i> by <a
+        href="https://github.com/tope-olajide">Temitope</a> </p></footer>
+</html>
