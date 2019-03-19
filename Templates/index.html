@@ -12,6 +12,18 @@
 <link rel="stylesheet" href="css/style.css">
 <link href="https://fonts.googleapis.com/css?family=Alegreya" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Eczar" rel="stylesheet">
+<div class="hide_search-overlay">
+  <div class="close-btn" onclick="hideSearchForm()">
+    <p>&times;</p>
+  </div>
+  <div id="search-form">
+    <form class="search-bar">
+      <input type="text" placeholder="Search.." name="search">
+      <button type="submit">search</button>
+    </form>
+  </div>
+</div>
+
 <body>
   <div class="header">
     <div class="auth-header">
@@ -24,8 +36,6 @@
       </div>
     </div>
     <div class="intro">
-
-
       <div class="sub-header">
         <h1>What are you writing for?</h1>
         <p> Whether you’re looking for a tool to record your daily emotions and activities in a reflective journal,
@@ -54,20 +64,14 @@
             <h2>Sign Up</h2>
           </div>
           <input type="text" name="firstname" placeholder="First name"><br>
-
           <input type="text" name="lastname" placeholder="Last name">
-
           <input type="text" name="lastname" placeholder="Username">
-
           <input type="text" name="lastname" placeholder="Email">
-
           <input type="password" name="lastname" placeholder="Password">
-
           <input type="password" name="lastname" placeholder="Repeat Password">
           <input type="submit" value="Submit">
         </form>
       </div>
-
     </div>
   </div>
 
@@ -171,34 +175,10 @@
               </div> -->
 
   </div>
-  <script>
-    function login() {
-      var signIn = document.querySelector('.signin-form');
-      var signUp = document.querySelector(".signup-form")
-      if (signIn.style.display === "block") {
-        signIn.style.display = "none";
-        signUp.style.display = "none";
-      } else {
-        signUp.style.display = "none";
-        signIn.style.display = "block";
-      }
-    }
-
-    function signUp() {
-      var signIn = document.querySelector('.signin-form');
-      var signUp = document.querySelector(".signup-form")
-      if (signUp.style.display === "block") {
-        signUp.style.display = "none";
-        signIn.style.display = "none";
-      } else {
-        signIn.style.display = "none";
-        signUp.style.display = "block";
-      }
-    }
-  </script>
+  <script src="js/script.js"></script>
   <footer class="footer">
-    <p class=" ">Copyright © 2018 BisLink. All rights reserved | Designed with <i class="fas fa-heart fa-lg"></i> by <a
-        href="https://github.com/tope-olajide">Temitope</a> </p>
+    <p class=" ">Copyright © 2019 My-Diary. All rights reserved | Designed with <i class="fas fa-heart fa-lg"></i> by
+      <a href="https://github.com/tope-olajide">Temitope</a> </p>
   </footer>
 </body>
 
