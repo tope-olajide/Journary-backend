@@ -5,81 +5,199 @@
     <meta charset="UTF-8">
     <title>My Dairy</title>
     <link rel="stylesheet" href="css/style.css">
-    <meta name="viewport" content=" width=device-width, initial-scale=1"/>
+    <meta name="viewport" content=" width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Alegreya" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Eczar" rel="stylesheet">
 </head>
 <div class="hide_search-overlay">
     <div class="close-btn" onclick="hideSearchForm()">
-        <p>X</p>
+        <p>&times;</p>
     </div>
-    <div id="search-form" >
+    <div id="search-form">
         <form class="search-bar">
             <input type="text" placeholder="Search.." name="search">
             <button type="submit">search</button>
-          </form></div>
+        </form>
+    </div>
 </div>
 <div class="header-container">
-<div class="top-nav-container">
-<div class="logo"><h1>MY-DIARY</h1>
+    <div class="top-nav-container">
+        <div class="logo">
+            <h1>MY-DIARY</h1>
 
-</div>
-<div class="menu-icon" onclick="toggleBar(this);"><div class="bar1"></div>
-<div class="bar2"></div>
-<div class="bar3"></div></div>
-<div class="topnav">
-    <a href="#" class="active">Home</a>
-    <a href="#" onclick="displaySearchForm()">Search</a>
-    <a href="#">Profile</a>
-    <a href="#">Private </a>
-    <a href="#">Public</a>
-    <a href="#">Logout</a>
-</div> 
-
+        </div>
+        <div class="menu-icon" onclick="toggleBar(this);">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+        <div class="topnav">
+            <a href="homepage.html" class="active"><i class="fas fa-home"></i> Home</a>
+            <a href="#" onclick="displaySearchForm()"><i class="fas fa-search"></i> Search</a>
+            <a href="add-entry.html"><i class="fas fa-edit"></i> New</a>
+            <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+            <a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </div>
 </div>
 
 <body>
 
+    <div class="entries-container">
+        <div class="tile">
+            <img src="./images/diary2.jpg" alt="">
+            <div class="tile-overlay">
+                <h1>Sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet Lorem ipsum. </h1>
+                <div class="author_view">
+                    <div>
+                        <p class="author">Jane Doe</p>
+                    </div>
+                    <div class="view-icon"> <i class="fas fa-eye"> 30</i></div>
+                </div>
+            </div>
+        </div>
+        <div class="tile">
+            <img src="./images/featured2.jpg" alt="">
+            <div class="tile-overlay">
+                <h1>Sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet Lorem ipsum. </h1>
+                <div class="author_view">
+                    <div>
+                        <p class="author">Jane Doe</p>
+                    </div>
+                    <div class="view-icon"> <i class="fas fa-eye"> 30</i></div>
+                </div>
+            </div>
+        </div>
+        <div class="tile">
+            <img src="./images/pen-and-paper.jpg" alt="">
+            <div class="tile-overlay">
+                <h1>Sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet Lorem ipsum. </h1>
+                <div class="author_view">
+                    <div>
+                        <p class="author">Jane Doe</p>
+                    </div>
+                    <div class="view-icon"> <i class="fas fa-eye"> 30</i></div>
+                </div>
+            </div>
+        </div>
+        <div class="tile">
+            <img src="./images/reserve-slide1.jpg" alt="">
+            <div class="tile-overlay">
+                <h1>Sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet Lorem ipsum. </h1>
+                <div class="author_view">
+                    <div>
+                        <p class="author">Jane Doe</p>
+                    </div>
+                    <div class="view-icon"> <i class="fas fa-eye"> 30</i></div>
+                </div>
+            </div>
+        </div>
+        <div class="tile">
+            <img src="./images/revslide.jpg" alt="">
+            <div class="tile-overlay">
+                <h1>Sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet Lorem ipsum. </h1>
+                <div class="author_view">
+                    <div>
+                        <p class="author">Jane Doe</p>
+                    </div>
+                    <div class="view-icon"> <i class="fas fa-eye"> 30</i></div>
+                </div>
+            </div>
+        </div>
+        <div class="tile">
+            <img src="./images/pic1.jpg" alt="">
+            <div class="tile-overlay">
+                <h1>Sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet Lorem ipsum. </h1>
+                <div class="author_view">
+                    <div>
+                        <p class="author">Jane Doe</p>
+                    </div>
+                    <div class="view-icon"> <i class="fas fa-eye"> 30</i></div>
+                </div>
+            </div>
+        </div>
+        <div class="tile">
+            <img src="./images/portrait.jpg" alt="">
+            <div class="tile-overlay">
+                <h1>Sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet Lorem ipsum. </h1>
+                <div class="author_view">
+                    <div>
+                        <p class="author">Jane Doe</p>
+                    </div>
+                    <div class="view-icon"> <i class="fas fa-eye"> 30</i></div>
+                </div>
+            </div>
+        </div>
+        <div class="tile">
+            <img src="./images/portrait.jpg" alt="">
+            <div class="tile-overlay">
+                <h1>Sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet Lorem ipsum. </h1>
+                <div class="author_view">
+                    <div>
+                        <p class="author">Jane Doe</p>
+                    </div>
+                    <div class="view-icon"> <i class="fas fa-eye"> 30</i></div>
+                </div>
+            </div>
+        </div>
+        <div class="tile">
+            <img src="./images/portrait.jpg" alt="">
+            <div class="tile-overlay">
+                <h1>Sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet Lorem ipsum. </h1>
+                <div class="author_view">
+                    <div>
+                        <p class="author">Jane Doe</p>
+                    </div>
+                    <div class="view-icon"> <i class="fas fa-eye"> 30</i></div>
+                </div>
+            </div>
+        </div>
+        <div class="tile">
+            <img src="./images/portrait.jpg" alt="">
+            <div class="tile-overlay">
+                <h1>Sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet Lorem ipsum. </h1>
+                <div class="author_view">
+                    <div>
+                        <p class="author">Jane Doe</p>
+                    </div>
+                    <div class="view-icon"> <i class="fas fa-eye"> 30</i></div>
+                </div>
+            </div>
+        </div>
+        <div class="tile">
+            <img src="./images/portrait.jpg" alt="">
+            <div class="tile-overlay">
+                <h1>Sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet Lorem ipsum. </h1>
+                <div class="author_view">
+                    <div>
+                        <p class="author">Jane Doe</p>
+                    </div>
+                    <div class="view-icon"> <i class="fas fa-eye"> 30</i></div>
+                </div>
+            </div>
+        </div>
+        <div class="tile">
+            <img src="./images/portrait.jpg" alt="">
+            <div class="tile-overlay">
+                <h1>Sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet Lorem ipsum. </h1>
+                <div class="author_view">
+                    <div>
+                        <p class="author">Jane Doe</p>
+                    </div>
+                    <div class="view-icon"> <i class="fas fa-eye"> 30</i></div>
+                </div>
+            </div>
+        </div>
 
-</div>
+    </div>
+    <script src="js/script.js"></script>
+    </div>
+    <footer class="footer">
+        <p class=" ">Copyright © 2019 My-Diary. All rights reserved | Designed with <i class="fas fa-heart fa-lg"></i>
+            by <a href="https://github.com/tope-olajide">Temitope</a> </p>
+    </footer>
+</body>
 
-<div class="entries-container">
-    <div class="tile">
-        <img src="./images/diary2.jpg" alt=""><div class="tile-overlay"></div>
-    </div>
-    <div class="tile">
-        <img src="./images/featured2.jpg" alt=""><div class="tile-overlay"></div>
-    </div>
-    <div class="tile">
-        <img src="./images/pen-and-paper.jpg" alt=""> <div class="tile-overlay"></div>
-        
-    </div>
-    <div class="tile">
-        <img src="./images/reserve-slide1.jpg" alt=""> <div class="tile-overlay"></div>
-    </div>
-    <div class="tile">
-        <img src="./images/revslide.jpg" alt=""> <div class="tile-overlay"></div>
-    </div>
-    <div class="tile">
-        <img src="./images/pic1.jpg" alt=""> <div class="tile-overlay"></div>
-    </div>
-    <div class="tile">
-        <img src="./images/portrait.jpg" alt=""> <div class="tile-overlay"></div>
-    </div>
- 
-</div>
-<script>
-    function displaySearchForm (){
-    var searchBar = document.querySelector('.hide_search-overlay');
-    searchBar.className="search-overlay";
-    }
-    function hideSearchForm (){
-        var searchBar = document.querySelector('.search-overlay');
-        searchBar.className="hide_search-overlay";
-    }
-function toggleBar(menuIcon) {
-    let toggleNavigation= document.querySelector('.topnav')
-    menuIcon.classList.toggle("change");
-    toggleNavigation.classList.toggle("show-topnav")
-}
-</script>
-        </body>
-        </html>
+</html>

@@ -4,44 +4,54 @@
 <head>
   <meta charset="UTF-8">
   <title>My Dairy</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+  crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Alegreya" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Eczar" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 </head>
-
-<div class="header-container">
-  <div class="top-nav-container">
-    <div class="logo">
-      <h1>MY-DIARY</h1>
-    </div>
-    <form class="search-bar" id="search-form">
-      <input type="text" placeholder="Search.." name="search">
-      <button type="submit">search</button>
-    </form>
-    <div class="avatar">
-      <p>username</p><img src="./images/avatar.jpg" alt="">
-    </div>
+<div class="hide_search-overlay">
+  <div class="close-btn" onclick="hideSearchForm()">
+      <p>&times;</p>
   </div>
-
-  <body>
-
-    <div class="topnav">
-      <a href="#home" class="active">Home</a>
-      <a href="#news">News</a>
-      <a href="#contact">Contact</a>
-    </div>
-
+  <div id="search-form" >
+      <form class="search-bar">
+          <input type="text" placeholder="Search.." name="search">
+          <button type="submit">search</button>
+  </form></div>
 </div>
+<div class="header-container">
+    <div class="top-nav-container">
+    <div class="logo"><h1>MY-DIARY</h1>
+    </div>
+    <div class="menu-icon" onclick="toggleBar(this);"><div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div></div>
+    <div class="topnav">
+        <a href="homepage.html"><i class="fas fa-home"></i> Home</a>
+        <a href="#" onclick="displaySearchForm()"><i class="fas fa-search"></i> Search</a>
+        <a href="add-entry.html"><i class="fas fa-edit"></i> New</a>
+        <a href="profile.html" class="active"><i class="fas fa-user"></i> Profile</a>
+        <a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+    </div></div>
 
-<div class="profile-header">
-  <div class="profile-picture">
-    <!-- <div class="profile-overlay"> --><img src="./images/avatar.jpg" alt=""><!-- </div> -->
+<div class="profile-header"><span class="sidenav-icon" onclick="openNav()">&#9776; My Entries</span>
+      <div id="profileSidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="private.html"><i class="fas fa-lock"></i> Private</a>
+        <a href="public.html"><i class="fas fa-lock-open"></i> Public</a>
+        <a href="settings.html"><i class="fas fa-gear"></i> Settings</a>
+        <a href="#">Contact</a>
+      </div>
+      <br><br><div class="profile-picture">
+     <div class="profile-overlay"> </div><img class="profile-picture-img" src="./images/avatar.jpg" alt="">
   </div>
   <div class="profile-info">
-    <h2>Mary Jane</h2>
+    <h2 class="about">Mary Jane</h2>
     <p>Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet</p>
-    <h3>Location</h3>
-    <p>Lagos, Nigeria</p>
-    <h2>Entries</h2>
+    <h3>Entries</h3>
     <table>
         <tr>
           <th>Private</th>
@@ -53,12 +63,15 @@
           <td>223</td>
           <td>23</td>
         </tr>
-        
       </table>
+      <button class="edit-profile__button">Edit Profile</button>
   </div>
-  <div class="profile-footer">
-  </div>
-</div>
-</body>
 
+</div>
+
+</body>
+<script src="js/script.js"></script>
+    <footer class="footer">
+        <p class=" ">Copyright © 2019 My-Diary. All rights reserved | Designed with <i class="fas fa-heart fa-lg"></i> by <a
+            href="https://github.com/tope-olajide">Temitope</a> </p></footer>
 </html>
