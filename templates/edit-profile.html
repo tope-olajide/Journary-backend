@@ -9,7 +9,16 @@
   <link rel="stylesheet" href="css/style.css">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 </head>
-
+<div class="hide_search-overlay">
+  <div class="close-btn" onclick="hideSearchForm()">
+      <p>&times;</p>
+  </div>
+  <div id="search-form" >
+      <form class="search-bar">
+          <input type="text" placeholder="Search.." name="search">
+          <button type="submit">search</button>
+  </form></div>
+</div>
 <div class="header-container">
     <div class="top-nav-container">
     <div class="logo"><h1>MY-DIARY</h1>
@@ -19,14 +28,12 @@
     <div class="bar2"></div>
     <div class="bar3"></div></div>
     <div class="topnav">
-            <a href="homepage.html" class="active"><i class="fas fa-home"></i> Home</a>
-            <a href="#" onclick="displaySearchForm()"><i class="fas fa-search"></i> Search</a>
-            <a href="add-entry.html"><i class="fas fa-edit"></i> New</a>
-            <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
-            <a href="private.html"><i class="fas fa-lock"></i> Private </a>
-            <a href="public.html"<i class="fas fa-lock-open"></i> Public</a>
-            <a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
-        </div> 
+      <a href="homepage.html"><i class="fas fa-home"></i> Home</a>
+      <a href="#" onclick="displaySearchForm()"><i class="fas fa-search"></i> Search</a>
+      <a href="add-entry.html"><i class="fas fa-edit"></i> New</a>
+      <a href="profile.html" class="active"><i class="fas fa-user"></i> Profile</a>
+<a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  </div> 
     </div></div>
 
 <div class="profile-header">
@@ -50,8 +57,8 @@
                   </form>
               </div>
 </div>
-</body>
+</body><script src="js/script.js"></script>
 <footer class="footer">
-    <p class=" ">Copyright © 2018 BisLink. All rights reserved | Designed with <i class="fas fa-heart fa-lg"></i> by <a
+    <p class=" ">Copyright © 2019 My-Diary. All rights reserved | Designed with <i class="fas fa-heart fa-lg"></i> by <a
         href="https://github.com/tope-olajide">Temitope</a> </p></footer>
 </html>
