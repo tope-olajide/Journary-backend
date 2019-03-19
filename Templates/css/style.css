@@ -304,7 +304,8 @@ form.search-bar button:hover {
   justify-content: center;
   height: 200px;
   background-color: rgb(20, 5, 5);
-  color: white
+  color: white;
+  z-index: 999;
 }
 
 /* 
