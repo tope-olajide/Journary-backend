@@ -552,6 +552,13 @@ textarea::placeholder {
   position: absolute;
   top: 0px;
   object-fit: cover;
+  transition:all 0.4s ease;
+}
+.tile-overlay:hover{
+  -webkit-transform: scale(0.98);
+  -ms-transform: scale(0.95);
+  transform: scale(0.95);
+  cursor: pointer;
 }
 
 .tile:nth-child(7n+1) .tile-overlay {
@@ -605,6 +612,9 @@ textarea::placeholder {
 
 .tile {
   position: relative;
+  transition:all 0.3s ease;
+  overflow: hidden;
+  max-width:100%
 }
 
 .tile img {
@@ -637,6 +647,22 @@ textarea::placeholder {
   margin: 25px auto;
   font-family: 'Alegreya', serif;
   line-height: 1.2;
+}
+
+.author_view {
+  display: flex;
+  justify-content: space-between;
+width:90%;
+margin:0 auto
+}
+.view-icon{
+  color: rgb(250, 244, 244);
+  font-size: 1.1rem;
+}
+.author {
+  line-height: 0px;
+  font-size: 1.1rem;
+  font-style: italic
 }
 
 /* .tile:nth-child(2){
@@ -879,17 +905,19 @@ td {
     opacity: 1;
     transition: opacity 1s linear;
   }
+
   .show-topnav a:hover {
     border-bottom: 3px solid white;
   }
-  
+
   .show-topnav a.active {
     border-bottom: 3px solid white;
   }
 
   .show-topnav a {
-width: 100%; background: rgb(9, 9, 29);
-margin-left: auto
+    width: 100%;
+    background: rgb(9, 9, 29);
+    margin-left: auto
   }
 
   .entries-container {
