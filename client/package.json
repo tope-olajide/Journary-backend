@@ -1,12 +1,18 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
+  "name": "mydiary-client",
+  "author": "",
+  "license": "ISC",
+  "version": "1.0.0",
   "private": true,
+  "description": "",
+  "main": "index.js",
   "dependencies": {
+    "draft-js": "^0.10.5",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8"
+    "react-scripts": "^2.1.8"
   },
+  "devDependencies": {},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -22,4 +28,5 @@
     "not ie <= 11",
     "not op_mini all"
   ]
+
 }
