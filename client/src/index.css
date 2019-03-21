@@ -177,6 +177,7 @@ h1 {
 }
 
 .search-overlay {
+  top:0;
   width: 100%;
   height: 100%;
   position: fixed;
@@ -902,6 +903,7 @@ td {
     display: flex;
     flex-direction: column;
     margin-right: auto;
+
     visibility: visible;
     opacity: 1;
     transition: opacity 1s linear;
@@ -916,9 +918,13 @@ td {
   }
 
   .show-topnav a {
-    width: 100%;
-    background: rgb(9, 9, 29);
-    margin-left: auto
+    color: white;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 20px;
+    border-bottom: 3px solid transparent;
+    margin-right: 15px;
   }
 
   .entries-container {
@@ -966,7 +972,7 @@ td {
   z-index: 10;
 }
 
-.sidenav {
+.hide-sidenav {
   height: 100%;
   width: 0;
   position: absolute;
@@ -978,8 +984,20 @@ td {
   transition: 0.5s;
   padding-top: 150px;
 }
+.show-sidenav {
+  height: 100%;
+  width: 250px;
+  position: absolute;
+  z-index: 12;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow: auto;
+  transition: 0.5s;
+  padding-top: 150px;
+}
 
-.sidenav a {
+.show-sidenav a,.hide-sidenav  a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
@@ -988,11 +1006,11 @@ td {
   transition: 0.3s;
 }
 
-.sidenav a:hover {
+.show-sidenav a:hover {
   color: #f1f1f1;
 }
 
-.sidenav .closebtn {
+.show-sidenav .closebtn {
   position: absolute;
   top: 0;
   right: 25px;
@@ -1001,11 +1019,11 @@ td {
 }
 
 @media screen and (max-height: 450px) {
-  .sidenav {
+  .show-sidenav {
     padding-top: 15px;
   }
 
-  .sidenav a {
+  .show-sidenav a {
     font-size: 18px;
   }
 }
