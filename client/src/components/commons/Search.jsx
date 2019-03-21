@@ -1,10 +1,11 @@
 import React from 'react';
-const Search=({ displaySearch })=> {
-    if (displaySearch) {
+const Search=({ displaySearch, closeSearch })=> {
+
+    if ({displaySearch}) {
         return (
         <>
-        <div className="hide_search-overlay">
-          <div className="close-btn" onclick="hideSearchForm()">
+        <div className={displaySearch?"search-overlay":"hide_search-overlay"}>
+          <div className="close-btn" onClick={closeSearch}>
             <p>&times;</p>
           </div>
           <div id="search-form">
