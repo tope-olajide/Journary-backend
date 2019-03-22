@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+
 import AuthPage from './components/Auth'
 import HomePage from './components/diaries'
 import Profile from './components/profile'
+import Entry from './components/add-entry'
 class App extends Component {
   render() {
     return (
@@ -17,7 +19,7 @@ class App extends Component {
 <link href="https://fonts.googleapis.com/css?family=Alegreya" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css?family=Eczar" rel="stylesheet"/>
 <body>
-<Profile />
+<Entry />
 </body>
 </html>
 </>
