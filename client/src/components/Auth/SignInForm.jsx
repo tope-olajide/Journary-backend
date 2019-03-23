@@ -1,5 +1,13 @@
 import React from "react";
-const SignInForm = ({ showSignin }) => {
+const SignInForm = ({
+  showSignin,
+  saveSigninToState,
+  authname,
+  password,
+  signinUser,
+  submitValue,
+  isLoading
+}) => {
   if (showSignin) {
     return (
       <div class="signin-form">
@@ -9,14 +17,30 @@ const SignInForm = ({ showSignin }) => {
         <form class="login-form">
           <br />
           <br />
-          Username:
+          Username or Email:
           <br />
-          <input type="text" name="firstname" />
+          <input
+            type="text"
+            name="authname"
+            defaultValue={authname}
+            onChange={event => {
+              saveSigninToState("authname", event.target.value);
+            }}
+          />
           <br />
           Password:
           <br />
-          <input type="password" name="lastname" />
-          <input type="submit" value="Submit" />
+          <input
+            type="password"
+            name="password"
+            defaultValue={password}
+            onChange={event => {
+              saveSigninToState("password", event.target.value);
+            }}
+          />
+          <button type="submit" disabled={isLoading} onClick={signinUser}>
+            {submitValue}
+          </button>
         </form>
       </div>
     );
