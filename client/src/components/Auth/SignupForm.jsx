@@ -1,5 +1,14 @@
 import React from "react";
-const SignUpForm = ({ showSignup }) => {
+const SignUpForm = ({
+  showSignup,
+  handleInputChange,
+  signupUser,
+  fullname,
+  username,
+  email,
+  password,
+  repeatPassword
+}) => {
   if (showSignup) {
     return (
       <div class="signup-form">
@@ -7,24 +16,62 @@ const SignUpForm = ({ showSignup }) => {
           <div class="signup-header">
             <h2>Sign Up</h2>
           </div>
-          <input type="text" name="firstname" placeholder="First name" />
+          <input
+            type="text"
+            name="fullname"
+            placeholder="Fullname"
+            defaultValue={fullname}
+            onChange={event => {
+              handleInputChange("fullname", event.target.value);
+            }}
+          />
           <br />
-          <input type="text" name="lastname" placeholder="Last name" />
-          <input type="text" name="lastname" placeholder="Username" />
-          <input type="text" name="lastname" placeholder="Email" />
-          <input type="password" name="lastname" placeholder="Password" />
+
+          <input
+            type="text"
+            placeholder="Username"
+            defaultValue={username}
+            onChange={event => {
+              handleInputChange("username", event.target.value);
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Email"
+            defaultValue={email}
+            onChange={event => {
+              handleInputChange("email", event.target.value);
+            }}
+          />
           <input
             type="password"
-            name="lastname"
-            placeholder="Repeat Password"
+            placeholder="Password"
+            defaultValue={password}
+            onChange={event => {
+              handleInputChange("password", event.target.value);
+            }}
           />
-          <input type="submit" value="Submit" />
+          <input
+            type="password"
+            placeholder="Repeat Password"
+            defaultValue={repeatPassword}
+            onChange={event => {
+              handleInputChange("repeatPassword", event.target.value);
+            }}
+          />
+          <input
+            type="submit"
+            value="Submit"
+            onClick={event => {
+              event.preventDefault();
+              signupUser();
+            }}
+          />
         </form>
       </div>
     );
-  }
-  else{
-      return (null)
+  } else {
+    return null;
   }
 };
 export default SignUpForm;
