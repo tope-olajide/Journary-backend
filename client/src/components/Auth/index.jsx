@@ -1,14 +1,27 @@
 import React, { useState } from "react";
 import SignupForm from "./SignupForm";
 import SigninForm from "./SignInForm";
-import Search from "../commons/Search";
 import Main from "./Main";
 import Intro from "./Intro";
 import Footer from "../commons/Footer";
+import { validateUser } from "../../utils/validator";
+import toastNotification from "./../../utils/toastNotification";
+
 function Authpage() {
   const [showSignup, setShowSignup] = useState(true);
   const [showSignin, setShowSignin] = useState(false);
-  const [displaySearch, setDisplaySearch] = useState(false);
+  const [userSignUpDetails, setUserSignUpDetails] = useState({
+    fullname: "",
+    username: "",
+    email: "",
+    password: "",
+    repeatPassword: ""
+  });
+
+  const saveSignupToState = (key, value) => {
+    setUserSignUpDetails({ ...userSignUpDetails, [key]: value });
+    console.log(userSignUpDetails);
+  };
   const toggleSignup = () => {
     if (showSignin) {
       setShowSignup(true);
@@ -23,12 +36,14 @@ function Authpage() {
     }
     return setShowSignin(true);
   };
-  const toggleSearch = () => {
-    setDisplaySearch(!displaySearch);
+  const signupUser = () => {
+    const validateSignupError = validateUser(userSignUpDetails);
+    if (validateSignupError) {
+      toastNotification(["error"],validateSignupError);
+    }
   };
   return (
     <>
-      <Search displaySearch={displaySearch} closeSearch={toggleSearch} />
       <div class="header">
         <div class="auth-header">
           <div class="logo">
@@ -43,14 +58,20 @@ function Authpage() {
             <a href="#signup" onClick={toggleSignup}>
               <i class="fas fa-user-plus" /> Sign Up
             </a>
-            <a href="#signup" onClick={toggleSearch}>
-              <i class="fas fa-user-plus" /> search
-            </a>
           </div>
         </div>
         <div class="intro">
           <Intro />
-          <SignupForm showSignup={showSignup} />
+          <SignupForm
+            showSignup={showSignup}
+            handleInputChange={saveSignupToState}
+            signupUser={signupUser}
+            fullname={userSignUpDetails.fullname}
+            username={userSignUpDetails.username}
+            email={userSignUpDetails.email}
+            password={userSignUpDetails.password}
+            repeatPassword={userSignUpDetails.repeatPassword}
+          />
           <SigninForm showSignin={showSignin} />
         </div>
       </div>
