@@ -415,7 +415,7 @@ textarea::placeholder {
   color: blue
 }
 
-.login-form input[type=submit] {
+.login-form button {
   background-color: rgb(61, 80, 147);
   border: none;
   color: white;
