@@ -471,8 +471,27 @@ textarea::placeholder {
 /* 
 
 */
-.add-entry_header {
-  height: 60vh;
+.entry-image{
+  width: 300px;
+  height: 230px;
+  margin-left: auto;
+  margin-right: auto;
+  border:2px dotted white;
+  margin-top:3px;
+  margin-bottom: 7px;
+  background-color: rgba(30, 108, 217, 0.6);
+  border-radius: 2px;
+  padding: 10px
+}
+.entry-image img{
+  width: 300px;
+  height: 230px;
+}
+.entry-image img:hover{
+  opacity: .6;
+  cursor: pointer;
+}
+.entry-container{
   background-image:
     linear-gradient(to right bottom,
     rgba(76, 216, 255, 0.8),
@@ -482,19 +501,56 @@ textarea::placeholder {
   background-position: top;
   position: relative;
   background-clip: padding-box;
-  background-color: #F4F9FF
+  background-color: #F4F9FF;
 }
-
+.entry-title{
+  margin: 0px auto 5px auto;
+  width: 70%;
+}
+.entry-title input::placeholder{
+color:black
+}
+.entry-title input[type=text] {
+  height: 45px;
+  padding-left: 2%;
+  font-size: 17px;
+  border: 1px solid rgb(238, 233, 233);
+  width: 98%;
+  background-color: rgba(30, 108, 217, 0.6);
+  border-radius: 2px;
+  
+}
 .text-container {
-  width: 80%;
-  position: relative;
-  grid-column-start: 1;
-  grid-column-end: 4;
-  background-color: #ffffff;
-  margin: -100px auto 0 auto;
-  padding: 0
+  width: 70%;
+  background-color: rgba(30, 108, 217, 0.6);
+  margin: 0 auto 0 auto;
+  
 }
-
+.ql-container {
+  height: auto !important;
+}
+.ql-editor{
+  min-height: 300px !important;
+  max-height: 300px;
+  overflow: hidden;
+  overflow-y: scroll;
+  overflow-x: auto;
+}
+.submit-entry_btn{
+  margin-bottom: 25px;
+text-align: center;
+cursor: pointer;
+margin: 0 auto;
+}
+.submit-entry_btn input{
+    width: 70%;
+  height: 40px;
+   background-color: rgba(30, 108, 217, 0.6);
+}
+.submit-entry_btn input:hover{
+  background-color: rgba(30, 108, 217, 0.9);
+  cursor: pointer;
+}
 /* 
 
 */
