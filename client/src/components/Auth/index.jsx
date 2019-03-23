@@ -68,9 +68,9 @@ const disableLoading=()=>{
       props.signUp(userSignUpDetails).then(
         () => {
           toastNotification(["success"],`Welcome <br/><em>${userSignUpDetails.username}</em>`);
-/*           setTimeout(() => {
+           setTimeout(() => {
             window.location = "/";
-          }, 300); */
+          }, 300); 
           disableLoading()
         },
         error => {
@@ -93,9 +93,9 @@ const disableLoading=()=>{
     props.signIn(userSignInDetails)
       .then(() => {
         toastNotification(['success'], `Welcome back <br/><em>${userSignInDetails.authname}</em>`);
-      /*   setTimeout(() => {
+        setTimeout(() => {
           window.location = '/';
-        }, 300) */;disableLoading()
+        }, 300) ;disableLoading()
       },
       (error) => {
         disableLoading()
