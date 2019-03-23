@@ -79,7 +79,7 @@ export default class User {
   }
 
   static async signInUser(req, res) {
-    const authName = req.body.usernameOrEmail;
+    const authName = req.body.authname;
     const text = 'SELECT * FROM users WHERE username = $1 OR email =$1';
     const values = [authName];
     try {
