@@ -1,13 +1,14 @@
 import React from "react";
 const SignUpForm = ({
   showSignup,
-  handleInputChange,
+  saveSignupToState,
   signupUser,
   fullname,
   username,
   email,
   password,
-  repeatPassword
+  repeatPassword,
+  submitValue,isLoading
 }) => {
   if (showSignup) {
     return (
@@ -22,7 +23,7 @@ const SignUpForm = ({
             placeholder="Fullname"
             defaultValue={fullname}
             onChange={event => {
-              handleInputChange("fullname", event.target.value);
+              saveSignupToState("fullname", event.target.value);
             }}
           />
           <br />
@@ -32,7 +33,7 @@ const SignUpForm = ({
             placeholder="Username"
             defaultValue={username}
             onChange={event => {
-              handleInputChange("username", event.target.value);
+              saveSignupToState("username", event.target.value);
             }}
           />
           <input
@@ -40,7 +41,7 @@ const SignUpForm = ({
             placeholder="Email"
             defaultValue={email}
             onChange={event => {
-              handleInputChange("email", event.target.value);
+              saveSignupToState("email", event.target.value);
             }}
           />
           <input
@@ -48,7 +49,7 @@ const SignUpForm = ({
             placeholder="Password"
             defaultValue={password}
             onChange={event => {
-              handleInputChange("password", event.target.value);
+              saveSignupToState("password", event.target.value);
             }}
           />
           <input
@@ -56,17 +57,17 @@ const SignUpForm = ({
             placeholder="Repeat Password"
             defaultValue={repeatPassword}
             onChange={event => {
-              handleInputChange("repeatPassword", event.target.value);
+              saveSignupToState("repeatPassword", event.target.value);
             }}
           />
-          <input
+          <button
             type="submit"
-            value="Submit"
+            disabled={isLoading}
             onClick={event => {
               event.preventDefault();
               signupUser();
             }}
-          />
+          >{submitValue}</button>
         </form>
       </div>
     );
