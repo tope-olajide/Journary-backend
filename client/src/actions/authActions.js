@@ -20,7 +20,7 @@ export const signUp=(userData)=> {
           .decode(localStorage.getItem('token'))));
       });
   }
-  export function signIn(userData) {
+  export const signIn=(userData)=> {
     return dispatch => axios.post(`${url}signin`, userData)
       .then((response) => {
         const { token } = response.data;
@@ -29,4 +29,11 @@ export const signUp=(userData)=> {
         dispatch(setCurrentUser(jsonwebtoken
           .decode(localStorage.getItem('token'))));
       });
+  }
+  export const signOut=()=> {
+    return (dispatch) => {
+      localStorage.removeItem('token');
+      dispatch(setCurrentUser({}));
+      window.location = '/auth';
+    };
   }
