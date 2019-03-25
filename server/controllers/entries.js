@@ -33,11 +33,11 @@ export default class Entry {
     ];
     try {
       const { rows } = await db.query(text, values);
-      const result = rows[0];
+      const entry = rows[0];
       return res.status(201).json({
         success: true,
         message: 'New Entry created',
-        result,
+        entry,
         userId
       });
     } catch (error) {
