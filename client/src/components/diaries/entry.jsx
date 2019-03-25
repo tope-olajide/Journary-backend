@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-const Entry = ()=>{
+const Entry = ()=> {
     return (
     <>
         <div class="tile">

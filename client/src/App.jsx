@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import AuthPage from "./components/Auth";
 import HomePage from "./components/diaries";
 import Profile from "./components/profile";
-import Entry from "./components/add-entry";
+import AddEntry from "./components/add-entry";
 import EditProfile from "./components/edit-profile";
 const App = () => {
   return (
@@ -29,9 +29,10 @@ const App = () => {
           rel="stylesheet"
         />
         <body>
-        <Switch>
+<Switch>
     <Route exact path="/auth" component={AuthPage} />
     <Route exact path="/" component={HomePage} />
+    <Route exact path="/add-entry" component={AddEntry} />
 </Switch>
         </body>
       </html>
