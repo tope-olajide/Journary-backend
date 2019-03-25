@@ -92,7 +92,6 @@ const handleSubmit =()=>{
     toastNotification(["success"], `saved to database successfully`);
   }).catch(function(err) {
     toastNotification(["error"], `  ${err.response.data.message}`);
-    
   })
  }
  const formData = new FormData();
