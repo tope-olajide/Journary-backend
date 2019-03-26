@@ -5,8 +5,11 @@ import {
 import db from '../db';
 
 export default class Entry {
-  static async addEntry({ user, body }, res) {
-    const userId = user.userid;
+  static async addEntry({
+    user,
+    body
+  }, res) {
+    const userId = user.id;
     const {
       entryImageUrl,
       title,
@@ -22,7 +25,7 @@ export default class Entry {
         message: validateEntryError
       });
     }
-    const text = `INSERT INTO entries (entryImageUrl, title, content, userId)
+    const text = `INSERT INTO entries (entry_image_url, title, content, user_id)
         VALUES($1, $2, $3, $4)
         returning *`;
     const values = [
@@ -32,13 +35,14 @@ export default class Entry {
       userId
     ];
     try {
-      const { rows } = await db.query(text, values);
+      const {
+        rows
+      } = await db.query(text, values);
       const entry = rows[0];
       return res.status(201).json({
         success: true,
         message: 'New Entry created',
-        entry,
-        userId
+        entry
       });
     } catch (error) {
       res.status(500).json({
@@ -49,9 +53,15 @@ export default class Entry {
     }
   }
 
-  static async modifyEntry({ user, body, params }, res) {
-    const userId = user.userid;
-    const { entryId } = params;
+  static async modifyEntry({
+    user,
+    body,
+    params
+  }, res) {
+    const userId = user.id;
+    const {
+      entryId
+    } = params;
     const {
       entryImageUrl,
       title,
@@ -68,33 +78,36 @@ export default class Entry {
         message: validateEntryError
       });
     }
-    const findEntryQuery = 'SELECT * FROM entries WHERE entryId=$1';
-    const updateEntryQuery = 'UPDATE users SET entryImageUrl=$1,title=$2,content=$3,isPrivate=$4 returning *';
+    const findEntryQuery = 'SELECT * FROM entries WHERE entry_id=$1';
+    const updateEntryQuery = 'UPDATE entries SET entry_image_url=$1,title=$2,content=$3,is_private=$4 WHERE entry_id=$5 returning *';
     try {
-      const { rows } = await db.query(findEntryQuery, [entryId]);
+      const {
+        rows
+      } = await db.query(findEntryQuery, [entryId]);
       if (!rows[0]) {
         return res.status(404).json({
           success: false,
           message: 'diary does not exist!'
         });
       }
-      if (rows[0].userid !== userId) {
+      if (rows[0].user_id !== userId) {
         return res.status(401).json({
           success: false,
           message: 'You cannot modify a diary that was not created by You!'
         });
       }
       const values = [
-        entryImageUrl || rows[0].entryImageUrl,
+        entryImageUrl || rows[0].entry_image_url,
         title || rows[0].title,
         content || rows[0].content,
-        isPrivate || rows[0].isPrivate
+        isPrivate || rows[0].is_private,
+        entryId
       ];
       const response = await db.query(updateEntryQuery, values);
       return res.status(200).json({
         success: true,
         message: 'Entry updated successfully',
-        response: response.row[0]
+        response: response.rows[0]
       });
     } catch (error) {
       return res.status(500).json({
@@ -109,29 +122,33 @@ export default class Entry {
     params,
     user
   }, res) {
-    const userId = user.userid;
-    const { entryId } = params;
-    const findEntryQuery = 'SELECT * FROM entries WHERE entryId=$1';
-    const deleteQuery = 'DELETE FROM entries WHERE entryId=$1 returning *';
+    const userId = user.id;
+    const {
+      entryId
+    } = params;
+    const findEntryQuery = 'SELECT * FROM entries WHERE entry_id =$1';
+    const deleteQuery = 'DELETE FROM entries WHERE entry_id =$1 returning *';
     try {
-      const { rows } = await db.query(findEntryQuery, [entryId]);
+      const {
+        rows
+      } = await db.query(findEntryQuery, [entryId]);
       if (!rows[0]) {
         return res.status(404).json({
           success: false,
           message: 'diary does not exist!'
         });
       }
-      if (rows[0].userid !== userId) {
+      if (rows[0].user_id !== userId) {
         return res.status(401).json({
           success: false,
-          message: 'You cannot modify diary not created by You!'
+          message: 'You cannot delete diary not created by You!'
         });
       }
       const deleteDairy = await db.query(deleteQuery, [entryId]);
       if (deleteDairy.rows[0]) {
         res.status(200).json({
           success: true,
-          message: 'Diary Deleted!'
+          message: 'Diary Deleted successfully!'
         });
       }
     } catch (error) {
@@ -139,20 +156,30 @@ export default class Entry {
     }
   }
 
-  static async getEntry({
+  static async viewEntry({
     params,
     user
   }, res) {
-    const userId = user.userid;
-    const { entryId } = params;
-    const text = 'SELECT * FROM entries WHERE entryId = $1';
+    const userId = user.id;
+    const {
+      entryId
+    } = params;
+    const text = 'SELECT * FROM entries WHERE entry_id = $1';
     try {
-      const { rows } = await db.query(text, [entryId]);
+      const {
+        rows
+      } = await db.query(text, [entryId]);
       if (!rows[0]) {
-        return res.status(200).json({
+        return res.status(404).json({
           success: true,
           message: 'diary not found',
           dairy: []
+        });
+      }
+      if (rows[0].is_private === true && rows[0].user_id !== userId) {
+        return res.status(401).json({
+          success: false,
+          message: 'You cannot view an entry that was not created by you'
         });
       }
       return res.status(200).json({
@@ -166,17 +193,17 @@ export default class Entry {
   }
 
   static async getUserPrivateEntries({
-    params,
     user
   }, res) {
-    const userId = user.userid;
-    const { entryId } = params;
-    const text = 'SELECT * FROM entries WHERE isPrivate = $1 and userId =$2';
+    const userId = user.id;
+    const text = 'SELECT * FROM entries WHERE is_private = $1 and user_id =$2';
     const values = [
       true, userId
     ];
     try {
-      const { rows } = await db.query(text, values);
+      const {
+        rows
+      } = await db.query(text, values);
       if (!rows[0]) {
         return res.status(200).json({
           success: true,
@@ -195,17 +222,17 @@ export default class Entry {
   }
 
   static async getUserPublicEntries({
-    params,
     user
   }, res) {
-    const userId = user.userid;
-    const { entryId } = params;
-    const text = 'SELECT * FROM entries WHERE isPrivate = $1 and userId =$2';
+    const userId = user.id;
+    const text = 'SELECT * FROM entries WHERE is_Private = $1 and user_id =$2';
     const values = [
       true, userId
     ];
     try {
-      const { rows } = await db.query(text, values);
+      const {
+        rows
+      } = await db.query(text, values);
       if (!rows[0]) {
         return res.status(200).json({
           success: false,
@@ -224,10 +251,12 @@ export default class Entry {
   }
 
   static async getAllPublicEntries(req, res) {
-    const text = 'SELECT * FROM entries WHERE isPrivate =$1';
+    const text = 'SELECT * FROM entries WHERE is_private =$1';
     const values = [false];
     try {
-      const { rows } = await db.query(text, values);
+      const {
+        rows
+      } = await db.query(text, values);
       if (!rows[0]) {
         return res.status(200).json({
           success: false,
@@ -239,6 +268,46 @@ export default class Entry {
         success: true,
         message: 'Diaries found',
         diary: rows[0]
+      });
+    } catch (error) {
+      return res.status(400).send(error);
+    }
+  }
+
+  static async searchEntries({
+    query,
+    user
+  }, res) {
+    const {
+      search
+    } = query;
+    const searchQuery = search.split(' ');
+    const text = 'SELECT * FROM entries WHERE title LIKE $1 OR content LIKE $1';
+    const values = [`%${searchQuery[0]}%`];
+    const userId = user.id;
+    try {
+      const {
+        rows
+      } = await db.query(text, values);
+      if (!rows[0]) {
+        return res.status(200).json({
+          success: false,
+          message: 'diary not found',
+          dairy: []
+        });
+      }
+
+      const entries = rows.filter((entry) => {
+        if (!entry.is_private) {
+          return entry;
+        }
+        return entry.user_id === userId;
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: 'Diaries found',
+        diary: entries
       });
     } catch (error) {
       return res.status(400).send(error);
