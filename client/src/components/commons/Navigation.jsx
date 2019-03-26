@@ -24,7 +24,10 @@ import Search from "../commons/Search";
         </div>
         <div className={showNav?"show-topnav":"topnav"}>
             <a href="homepage.html" className="active"><i className="fas fa-home"></i> Home</a>
-            <a href="#search" onClick={toggleSearch}><i className="fas fa-search"></i> Search</a>
+            <a href="#search" onClick={event => {
+              event.preventDefault();
+              toggleSearch();
+            }}><i className="fas fa-search"></i> Search</a>
             <a href="add-entry.html"><i className="fas fa-edit"></i> New</a>
             <a href="profile.html"><i className="fas fa-user"></i> Profile</a>
             <a href="index.html"><i className="fas fa-sign-out-alt"></i> Logout</a>
