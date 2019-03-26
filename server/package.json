@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --exec babel-node index.js",
-    "migrate": "babel-node server/models/index "
+    "migrate": "babel-node models/index "
   },
   "keywords": [],
   "author": "Temitope Olajide",
@@ -59,6 +59,7 @@
     "connect-multiparty": "^2.1.1",
     "cors": "^2.8.4",
     "cross-env": "^5.2.0",
+    "crypto": "^1.0.1",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "express-fileupload": "^0.4.0",
