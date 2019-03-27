@@ -28,7 +28,7 @@ export default class Auth {
       || req.headers['authorization'];
 
     if (token) {
-      const jwtSecret = 'process.env.JWT_SECRET';
+      const jwtSecret = 'config.jwtSecret';
       jasonwebtoken.verify(token, jwtSecret, (err, decoded) => {
         if (err) {
           return res.status(401).json({

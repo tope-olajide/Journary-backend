@@ -15,7 +15,7 @@ export const signUp=(userData)=> {
       .then((response) => {
         const { token } = response.data;
         localStorage.setItem('token', token);
-        axios.defaults.headers.common.authorization = token;
+        axios.defaults.headers.common = {'Authorization':`bearer ${token}`};
         dispatch(setCurrentUser(jsonwebtoken
           .decode(localStorage.getItem('token'))));
       });
@@ -28,6 +28,7 @@ export const signUp=(userData)=> {
         axios.defaults.headers.common.authorization = token;
         dispatch(setCurrentUser(jsonwebtoken
           .decode(localStorage.getItem('token'))));
+
       });
   }
   export const signOut=()=> {

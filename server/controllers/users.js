@@ -63,7 +63,7 @@ export default class User {
       const { rows } = await db.query(text2, values2);
       const result = rows[0];
       const token = jsonwebtoken.sign({
-        userid: result.userid,
+        id: result.user_id,
         username: result.username,
         expiresIn: '24h'
       }, 'config.jwtSecret');
@@ -93,7 +93,7 @@ export default class User {
       }
       if (newEncryption.verifyHash(req.body.password, result.password)) {
         const token = jsonwebtoken.sign({
-          userid: result.userid,
+          id: result.user_id,
           username: result.username,
           expiresIn: '24h'
         }, 'config.jwtSecret');
