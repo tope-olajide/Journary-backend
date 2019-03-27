@@ -5,6 +5,7 @@ import HomePage from "./components/diaries";
 import Profile from "./components/profile";
 import AddEntry from "./components/add-entry";
 import EditProfile from "./components/edit-profile";
+import ViewEntry from "./components/view-entry"
 import withAuthorization from './utils/withAuthorization'
 const App = () => {
   return (
@@ -32,8 +33,10 @@ const App = () => {
         <body>
 <Switch>
     <Route exact path="/auth" component={AuthPage} />
-    <Route exact path="/" component={withAuthorization(HomePage)} />
+    <Route exact path="/" component={withAuthorization(ViewEntry)} />
     <Route exact path="/add-entry" component={withAuthorization(AddEntry)} />
+
+
 </Switch>
         </body>
       </html>
