@@ -10,7 +10,11 @@ const entry = express.Router();
 
 entry.use('*', newAuth.verify);
 entry.route('/search')
-  .get(Entry.searchEntries)
+  .get(Entry.searchEntries);
+
+entry.route('/notifications-settings')
+  .post(Entry.setNotifications);
+
 entry.route('/')
   .post(Entry.addEntry)
   .get(Entry.getAllPublicEntries);
@@ -25,7 +29,6 @@ entry.route('/:entryId')
   .put(Entry.modifyEntry)
   .delete(Entry.deleteEntry)
   .get(Entry.viewEntry);
-
 
 
 export default entry;
