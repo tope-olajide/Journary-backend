@@ -19,6 +19,9 @@ const config = {
     host: process.env.DB_HOST,
   },
   jwtSecret: process.env.JWT_SECRET,
+  email: process.env.email,
+  password: process.env.password
+
 };
 
 export default config;
