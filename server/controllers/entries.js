@@ -335,7 +335,6 @@ export default class Entry {
       schedule
     } = body;
 
-    const findNotificationSettingsQuery = 'SELECT * FROM users WHERE user_id=$1';
 
     const updateNotificationSettingsQuery = 'UPDATE users SET notification_settings=$1 WHERE user_id=$2 returning *';
     try {
@@ -344,10 +343,10 @@ export default class Entry {
         console.log('---------------------');
         console.log('Running Cron Job');
         const mailOptions = {
-          from: 'COMPANYEMAIL@gmail.com',
+          from: `My Diary <noreply@my-diary.com>`,
           to: updatedUser.rows[0].email,
-          subject: 'Not a GDPR update ;)',
-          text: 'Hi there, this email was automatically sent by us'
+          subject: 'Reminder',
+          text: 'Hi there, this email was automatically sent by us in order to remind you to write a new diary today. To unsubscribe for this reminder, login to the app and turn it off from your settings'
         };
         transporter.sendMail(mailOptions, (error, info) => {
           if (error) {

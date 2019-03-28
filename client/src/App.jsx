@@ -1,12 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import { Route, Switch } from "react-router-dom";
 import AuthPage from "./components/Auth";
 import HomePage from "./components/diaries";
 import Profile from "./components/profile";
-import AddEntry from "./components/add-entry";
+import AddEntry from "./components/add-entry/index";
 import EditProfile from "./components/edit-profile";
 import ViewEntry from "./components/view-entry"
-import Settings from "./components/settings"
+import Settings from "./components/reminder"
 import withAuthorization from './utils/withAuthorization'
 const App = () => {
   return (
