@@ -7,6 +7,7 @@ import EntryEditor from "../add-entry/EntryEditor";
 import TitleTextBox from "../add-entry/TitleTextBox";
 import SubmitButton from "../add-entry/SubmitButton";
 import OptionButton from "./OptionButton"
+import { connect } from "react-redux";
 import { modifyUserEntry } from "../../actions/entryActions";
 import axios from "axios";
 const ModifyUserEntry =(props)=> {
@@ -105,9 +106,11 @@ return (
       <div class="entry-container">
         <div class="entry-title">
           <ImageUpload files={files} setFiles={setFiles} />
+          <OptionButton isPrivate ={isPrivate} setPrivate={setPrivate}/>
           <TitleTextBox saveTitleToState={saveTitleToState} />
+          
         </div>
-        <OptionButton isPrivate ={isPrivate} setPrivate={setPrivate}/>
+        
         <EntryEditor
           handleContentChange={handleContentChange}
           content={content}
@@ -122,4 +125,8 @@ return (
     </>
 )
 }
-export default ModifyUserEntry
+
+export default connect(
+  null,
+  { modifyUserEntry }
+)(ModifyUserEntry);
