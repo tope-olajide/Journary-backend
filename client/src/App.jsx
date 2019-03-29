@@ -37,8 +37,6 @@ const App = () => {
     <Route exact path="/auth" component={AuthPage} />
     <Route exact path="/" component={withAuthorization(EditProfile)} />
     <Route exact path="/add-entry" component={withAuthorization(AddEntry)} />
-
-
 </Switch>
         </body>
       </html>
