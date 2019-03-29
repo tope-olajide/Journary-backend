@@ -9,7 +9,7 @@ const setHeaderToken = {
       authorization: token
     }
   }
-export function addEntry(entryData) {
+export const addEntry=(entryData)=> {
     return dispatch => axios.post(`${url}`, entryData,setHeaderToken)
         .then((response) => {
             const {
@@ -20,4 +20,16 @@ export function addEntry(entryData) {
                 entry
             });
         });
+}
+export const modifyUserEntry=(entryData)=> {
+  return dispatch => axios.put(`${url}`, entryData,setHeaderToken)
+      .then((response) => {
+          const {
+              entry
+          } = response.data;
+          dispatch({
+              type: ADD_ENTRY,
+              entry
+          });
+      });
 }
