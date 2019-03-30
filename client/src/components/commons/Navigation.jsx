@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Search from "../commons/Search";
-import { Route, Link } from "react-router-dom";
-const NavBar = () => {
+import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import { signOut } from "../../actions/authActions";
+const NavBar = (props) => {
   const [showNav, setShowNav] = useState(false);
   const [displaySearch, setDisplaySearch] = useState(false);
   const toggleSearch = () => {
@@ -9,6 +11,9 @@ const NavBar = () => {
   };
   const toggleNav = () => {
     setShowNav(!showNav);
+  };
+  const  signOut = () => {
+    props.signOut();
   };
   return (
     <>
@@ -23,9 +28,9 @@ const NavBar = () => {
             <div className="bar3" />
           </div>
           <div className={showNav ? "show-topnav" : "topnav"}>
-            <Link to="/" className="active">
+            <NavLink exact={true} to="/" >
               <i className="fas fa-home" /> Home
-            </Link>
+            </NavLink>
             <a
               href="#search"
               onClick={event => {
@@ -35,15 +40,15 @@ const NavBar = () => {
             >
               <i className="fas fa-search" /> Search
             </a>
-            <Link to="/add-entry">
+            <NavLink to="/add-entry" >
               <i className="fas fa-edit" /> New
-            </Link>
-            <Link to="/profile">
-              <i className="fas fa-user" /> Profile
-            </Link>
-            <Link to="/logout">
+            </NavLink>
+            <NavLink to="/profile" >
+              <i className="fas fa-user"/> Profile
+            </NavLink>
+            <NavLink  to="#?" onClick={signOut}>
               <i className="fas fa-sign-out-alt" /> Logout
-            </Link>
+            </NavLink>
           </div>
         </div>
       </div>
@@ -51,4 +56,8 @@ const NavBar = () => {
     </>
   );
 };
-export default NavBar;
+
+export default connect(
+    null,
+    { signOut }
+  )(NavBar);
