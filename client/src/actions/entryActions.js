@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {
-    ADD_ENTRY
+    ADD_ENTRY,FETCH_ALL_PUBLIC_ENTRIES
   } from './type';
 const url = 'http://127.0.0.1:9000/api/entry/';
 const token = localStorage.getItem('token');
@@ -25,11 +25,23 @@ export const modifyUserEntry=(entryData)=> {
   return dispatch => axios.put(`${url}`, entryData,setHeaderToken)
       .then((response) => {
           const {
-              entry
+              entries
           } = response.data;
           dispatch({
               type: ADD_ENTRY,
-              entry
+              entries
           });
       });
+}
+export function fetchAllPublicEntries(page) {
+    return dispatch => axios.get(`${url}?page=${page}`,setHeaderToken)
+        .then((response) => {
+            const {
+                entries,currentPage
+            } = response.data;
+            dispatch({
+                type: FETCH_ALL_PUBLIC_ENTRIES,
+                entries,currentPage
+            });
+        });
 }
