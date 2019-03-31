@@ -26,6 +26,7 @@ export default {
       entry_image_url TEXT,
       title TEXT NOT NULL,
       is_private BOOLEAN DEFAULT TRUE NOT NULL,
+      view_count INTEGER DEFAULT 0 
       content TEXT NOT NULL,
       created_at TIMESTAMP (0) without time zone default now(),
       updated_at TIMESTAMP
