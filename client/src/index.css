@@ -177,7 +177,7 @@ h1 {
 }
 
 .search-overlay {
-  top:0;
+  top: 0;
   width: 100%;
   height: 100%;
   position: fixed;
@@ -471,27 +471,30 @@ textarea::placeholder {
 /* 
 
 */
-.entry-image{
+.entry-image {
   width: 100%;
   height: 250px;
   margin-right: auto;
-  border:2px dotted white;
-  margin-top:3px;
+  border: 2px dotted white;
+  margin-top: 3px;
   margin-bottom: 7px;
   background-color: rgba(30, 108, 217, 0.6);
   border-radius: 2px;
 }
-.entry-image img{
+
+.entry-image img {
   width: 50%;
   height: 250px;
   margin-left: 20px;
   margin-right: auto;
 }
-.entry-image img:hover{
+
+.entry-image img:hover {
   opacity: .6;
   cursor: pointer;
 }
-.entry-container{
+
+.entry-container {
   background-image:
     linear-gradient(to right bottom,
     rgba(22, 41, 46, 0.8),
@@ -505,13 +508,16 @@ textarea::placeholder {
   padding-top: 20px;
   padding-bottom: 40px;
 }
-.entry-title{
+
+.entry-title {
   margin: 0px auto 5px auto;
   width: 70%;
 }
-.entry-title input::placeholder{
-color:black
+
+.entry-title input::placeholder {
+  color: black
 }
+
 .entry-title input[type=text] {
   height: 45px;
   padding-left: 2%;
@@ -520,39 +526,46 @@ color:black
   width: 98%;
   background-color: rgba(30, 108, 217, 0.6);
   border-radius: 2px;
-  
+
 }
+
 .text-container {
   width: 70%;
   background-color: rgba(30, 108, 217, 0.6);
   margin: 0 auto 0 auto;
-  
+
 }
+
 .ql-container {
   height: auto !important;
 }
-.ql-editor{
+
+.ql-editor {
   min-height: 300px !important;
   max-height: 300px;
   overflow: hidden;
   overflow-y: scroll;
   overflow-x: auto;
 }
-.submit-entry_btn{
+
+.submit-entry_btn {
   margin-bottom: 25px;
-text-align: center;
-cursor: pointer;
-margin: 7px auto;
+  text-align: center;
+  cursor: pointer;
+  margin: 7px auto;
 }
-.submit-entry_btn button{
-    width: 70%;
+
+.submit-entry_btn button {
+  width: 70%;
   height: 40px;
-   background-color: rgba(30, 108, 217, 0.6);
+  background-color: rgba(30, 108, 217, 0.6);
 }
-.submit-entry_btn button:hover{
+
+.submit-entry_btn button:hover {
   background-color: rgba(30, 108, 217, 0.9);
   cursor: pointer;
 }
+
 /* 
 
 */
@@ -612,9 +625,10 @@ margin: 7px auto;
   position: absolute;
   top: 0px;
   object-fit: cover;
-  transition:all 0.4s ease;
+  transition: all 0.4s ease;
 }
-.tile-overlay:hover{
+
+.tile-overlay:hover {
   -webkit-transform: scale(0.98);
   -ms-transform: scale(0.95);
   transform: scale(0.95);
@@ -672,9 +686,9 @@ margin: 7px auto;
 
 .tile {
   position: relative;
-  transition:all 0.3s ease;
+  transition: all 0.3s ease;
   overflow: hidden;
-  max-width:100%
+  max-width: 100%
 }
 
 .tile img {
@@ -712,13 +726,15 @@ margin: 7px auto;
 .author_view {
   display: flex;
   justify-content: space-between;
-width:90%;
-margin:0 auto
+  width: 90%;
+  margin: 0 auto
 }
-.view-icon{
+
+.view-icon {
   color: rgb(250, 244, 244);
   font-size: 1.1rem;
 }
+
 .author {
   line-height: 0px;
   font-size: 1.1rem;
@@ -1042,6 +1058,7 @@ td {
   transition: 0.5s;
   padding-top: 150px;
 }
+
 .show-sidenav {
   height: 100%;
   width: 250px;
@@ -1055,7 +1072,8 @@ td {
   padding-top: 150px;
 }
 
-.show-sidenav a,.hide-sidenav  a {
+.show-sidenav a,
+.hide-sidenav a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
@@ -1106,7 +1124,6 @@ h1 {
 }
 
 .container p {
-
   font-family: 'Open Sans', sans-serif;
   font-size: 18;
   font-style: normal;
@@ -1123,4 +1140,33 @@ h1 {
 .container img {
   height: 50vh;
   width: 100%
+}
+
+.pagination-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000;
+  padding: 10px
+}
+
+.next-page {
+  margin-left: 25px;
+  color: #F4F9FF;
+  padding: 0 10px 0 10px;
+  font-size: 1.2em
+}
+
+.prev-page {
+  margin-right: 25px;
+  color: #F4F9FF;
+  font-size: 1.2em;
+  padding: 0 10px 0 10px;
+}
+
+.prev-page:hover,
+.next-page:hover {
+  border-bottom: 3px solid white;
+  cursor: pointer;
 }
