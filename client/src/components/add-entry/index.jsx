@@ -87,7 +87,10 @@ const AddEntry = props => {
             toastNotification(["error"], `  ${err.response.data.message}`);
             disableLoading();
           });
-      });
+      }).catch(function(err) {
+        toastNotification(["error"], `  Unable To Upload Image!`);
+        disableLoading();
+      });;
     }
   };
 

@@ -177,6 +177,7 @@ export default class Entry {
       entryId
     } = params;
     const text = 'SELECT * FROM entries WHERE entry_id = $1';
+    const updateViewCountQuery = 'UPDATE entries SET view_count = view_count + 1 WHERE entry_id = $1 '
     try {
       const {
         rows
@@ -185,7 +186,7 @@ export default class Entry {
         return res.status(404).json({
           success: true,
           message: 'diary not found',
-          dairy: []
+          entry: []
         });
       }
       if (rows[0].is_private === true && rows[0].user_id !== userId) {
@@ -194,10 +195,11 @@ export default class Entry {
           message: 'You cannot view an entry that was not created by you'
         });
       }
+      const updateQuery = await db.query(updateViewCountQuery, [entryId]);
       return res.status(200).json({
         success: true,
         message: 'Diary found',
-        diary: rows[0]
+        diary: rows,
       });
     } catch (error) {
       return res.status(400).send(error);
@@ -220,13 +222,13 @@ export default class Entry {
         return res.status(200).json({
           success: true,
           message: 'diary not found',
-          dairy: []
+          entres: []
         });
       }
       return res.status(200).json({
         success: true,
         message: 'Diary found',
-        diary: rows[0]
+        diary: rows
       });
     } catch (error) {
       return res.status(400).send(error);
@@ -249,7 +251,7 @@ export default class Entry {
         return res.status(200).json({
           success: false,
           message: 'diary not found',
-          dairy: []
+          entres: []
         });
       }
       return res.status(200).json({
@@ -263,8 +265,11 @@ export default class Entry {
   }
 
   static async getAllPublicEntries(req, res) {
-    const text = 'SELECT * FROM entries WHERE is_private =$1';
-    const values = [false];
+    const limit = 7;
+    const currentPage = Number(req.query.page) || 1;
+    const offset = (currentPage - 1) * limit;
+    const text = 'SELECT entry_id,title,entry_image_url,content,username,view_count FROM entries INNER JOIN users ON users.user_id = entries.user_id WHERE is_private =$1 LIMIT $2 OFFSET $3';
+    const values = ['false', limit, offset];
     try {
       const {
         rows
@@ -273,13 +278,14 @@ export default class Entry {
         return res.status(200).json({
           success: false,
           message: 'diary not found',
-          dairy: []
+          entries: []
         });
       }
       return res.status(200).json({
         success: true,
         message: 'Diaries found',
-        diary: rows[0]
+        entries: rows,
+        currentPage
       });
     } catch (error) {
       return res.status(400).send(error);
@@ -305,7 +311,7 @@ export default class Entry {
         return res.status(200).json({
           success: false,
           message: 'diary not found',
-          dairy: []
+          entres: []
         });
       }
 

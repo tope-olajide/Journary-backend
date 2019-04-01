@@ -1,20 +1,26 @@
 import React, { useState } from "react";
-const Entry = ()=> {
-    return (
+import Image from 'react-graceful-image'
+const Entry = ({imageUrl, title,username,viewCount}) => {
+  return (
     <>
-        <div class="tile">
-            <img src="./images/diary2.jpg" alt=""/>
-            <div class="tile-overlay">
-                <h1>Sed do eiusmod tempor incididunt ut Lorem ipsum dolor sit amet Lorem ipsum. </h1>
-                <div class="author_view">
-                    <div>
-                        <p class="author">Jane Doe</p>
-                    </div>
-                    <div class="view-icon"> <i class="fas fa-eye"> 30</i></div>
-                </div>
+      <div class="tile">
+        <Image src={imageUrl} alt={imageUrl} />
+        <div class="tile-overlay">
+          <h1>
+            {title}
+          </h1>
+          <div class="author_view">
+            <div>
+              <p class="author">{username}</p>
             </div>
+            <div class="view-icon">
+              {" "}
+              <i class="fas fa-eye"> {viewCount}</i>
+            </div>
+          </div>
         </div>
+      </div>
     </>
-        )
-}
-export default Entry
+  );
+};
+export default Entry;

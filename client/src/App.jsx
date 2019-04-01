@@ -35,10 +35,14 @@ const App = () => {
         <body>
 <Switch>
     <Route exact path="/auth" component={AuthPage} />
-    <Route exact path="/" component={withAuthorization(ModifyUserEntry)} />
+    <Route exact path="/" component={withAuthorization(HomePage)} />
+    <Route exact path="/profile" component={withAuthorization(Profile)} />
+    <Route exact path="/edit-profile" component={withAuthorization(EditProfile)} />
+    <Route exact path="/view-entry/" component={withAuthorization(ViewEntry)} />
+    <Route exact path="/profile/settings" component={withAuthorization(Settings)} />
+    <Route exact path="/profile/private" component={withAuthorization(ModifyUserEntry)} />
+    <Route exact path="/profile/public" component={withAuthorization(ModifyUserEntry)} />
     <Route exact path="/add-entry" component={withAuthorization(AddEntry)} />
-
-
 </Switch>
         </body>
       </html>
