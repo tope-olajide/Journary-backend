@@ -199,7 +199,7 @@ export default class Entry {
       return res.status(200).json({
         success: true,
         message: 'Diary found',
-        diary: rows,
+        entry: rows,
       });
     } catch (error) {
       return res.status(400).send(error);
