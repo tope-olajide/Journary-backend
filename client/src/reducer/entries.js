@@ -1,5 +1,5 @@
 import {
-  FETCH_ALL_PUBLIC_ENTRIES,FETCH_ENTRY_DETAILS
+  FETCH_ALL_PUBLIC_ENTRIES,FETCH_ENTRY_DETAILS,FETCH_USER_PRIVATE_ENTRIES
 } from '../actions/type'
 
 const initialState = {
@@ -21,6 +21,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         entryDetails: action.entry
+      };
+      case FETCH_USER_PRIVATE_ENTRIES:
+      return {
+        ...state,
+        entries: action.entries,
+        currentPage: action.currentPage
       };
     default:
       return state;
