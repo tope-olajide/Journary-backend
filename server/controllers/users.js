@@ -2,7 +2,10 @@
 /* eslint-disable require-jsdoc */
 import jsonwebtoken from 'jsonwebtoken';
 import db from '../db';
-import { validateUser, validateModifiedUser } from '../middleware/validator';
+import {
+  validateUser,
+  validateModifiedUser
+} from '../middleware/validator';
 import Encryption from '../middleware/encryption';
 
 
@@ -31,7 +34,9 @@ export default class User {
     const text = 'SELECT * FROM users WHERE username = $1 OR email =$2';
     const values = [username, email];
     try {
-      const { rows } = await db.query(text, values);
+      const {
+        rows
+      } = await db.query(text, values);
       if (rows[0]) {
         if (rows[0].username.toUpperCase() === username.toUpperCase()) {
           return res.status(400).json({
@@ -60,7 +65,9 @@ export default class User {
     ];
 
     try {
-      const { rows } = await db.query(text2, values2);
+      const {
+        rows
+      } = await db.query(text2, values2);
       const result = rows[0];
       const token = jsonwebtoken.sign({
         id: result.user_id,
@@ -83,7 +90,9 @@ export default class User {
     const text = 'SELECT * FROM users WHERE username = $1 OR email =$1';
     const values = [authName];
     try {
-      const { rows } = await db.query(text, values);
+      const {
+        rows
+      } = await db.query(text, values);
       const result = rows[0];
       if (!result) {
         return res.status(401).json({
@@ -119,7 +128,7 @@ export default class User {
     body,
     user
   }, res) {
-    const userId = user.userid;
+    const userId = user.id;
     const {
       fullname,
       email,
@@ -139,7 +148,9 @@ export default class User {
     const findUserQuery = 'SELECT * FROM users WHERE id=$1';
     const updateUserQuery = 'UPDATE users SET fullname=$1,email=$2,about=$3,image=$4, returning *';
     try {
-      const { rows } = await db.query(findUserQuery, [userId]);
+      const {
+        rows
+      } = await db.query(findUserQuery, [userId]);
       if (!rows[0]) {
         return res.status(404).json({
           success: false,
@@ -164,6 +175,42 @@ export default class User {
         message: "Error Updating user's profile",
         error
       });
+    }
+  }
+
+  static async getUser({
+    user
+  }, res) {
+    const userId = user.id;
+    const text = 'SELECT * FROM users WHERE user_id = $1';
+    const queryPrivateEntriesCount = 'SELECT COUNT(*) FROM entries WHERE is_Private = true and user_id =$1';
+    const queryPublicEntriesCount = 'SELECT COUNT(*) FROM entries WHERE is_private = false and user_id =$1';
+    const values = [userId
+    ];
+    try {
+      const {
+        rows
+      } = await db.query(text, values);
+      const privateEntriesCount = await db.query(queryPrivateEntriesCount, values);
+      const publicEntriesCount = await db.query(queryPublicEntriesCount, values);
+      const totalEntriesCount = parseInt(privateEntriesCount.rows[0].count, 10) + parseInt(publicEntriesCount.rows[0].count, 10);
+      if (!rows[0]) {
+        return res.status(404).json({
+          success: true,
+          message: 'diary not found',
+          entry: []
+        });
+      }
+      return res.status(200).json({
+        success: true,
+        message: 'User found',
+        userData: rows,
+        privateEntriesCount: privateEntriesCount.rows[0].count,
+        publicEntriesCount: publicEntriesCount.rows[0].count,
+        totalEntriesCount
+      });
+    } catch (error) {
+      return res.status(400).send(error);
     }
   }
 }

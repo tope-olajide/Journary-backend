@@ -1,8 +1,8 @@
 import axios from 'axios';
 import {
-    ADD_ENTRY,FETCH_ALL_PUBLIC_ENTRIES
+    ADD_ENTRY,FETCH_ALL_PUBLIC_ENTRIES,FETCH_ENTRY_DETAILS
   } from './type';
-const url = 'http://127.0.0.1:9000/api/entry/';
+const url = 'http://127.0.0.1:9000/api/entry';
 const token = localStorage.getItem('token');
 const setHeaderToken = {
     headers: {
@@ -33,7 +33,7 @@ export const modifyUserEntry=(entryData)=> {
           });
       });
 }
-export function fetchAllPublicEntries(page) {
+export const fetchAllPublicEntries=(page)=> {
     return dispatch => axios.get(`${url}?page=${page}`,setHeaderToken)
         .then((response) => {
             const {
@@ -42,6 +42,19 @@ export function fetchAllPublicEntries(page) {
             dispatch({
                 type: FETCH_ALL_PUBLIC_ENTRIES,
                 entries,currentPage
+            });
+        });
+}
+export const fetchUserEntryDetails=(entryId)=> {
+    return dispatch => axios.get(`${url}/${entryId}`,setHeaderToken)
+        .then((response) => {
+            const {
+                entry
+            } = response.data;
+            
+            dispatch({
+                type: FETCH_ENTRY_DETAILS,
+                entry,
             });
         });
 }

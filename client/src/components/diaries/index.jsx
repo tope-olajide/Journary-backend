@@ -50,6 +50,7 @@ const entryList =  entries.map(entry=>{
       title={entry.title}
       username={entry.username}
       viewCount={entry.view_count}
+      entryId={entry.entry_id}
       />
     </>
   )
