@@ -4,10 +4,10 @@ import NavigationBar from "../commons/Navigation";
 import Footer from "../commons/Footer";
 import Entry from "../diaries/entry";
 import Pagination from "../commons/Pagination";
-import { fetchUserPrivateEntries } from "../../actions/entryActions";
+import { fetchUserPublicEntries } from "../../actions/entryActions";
 import toastNotification from "./../../utils/toastNotification";
 
-const Dairies = ({dispatch, privateEntries, currentPage } ) => {
+const Dairies = ({dispatch, publicEntries, currentPage } ) => {
   const [isLoading, setIsloading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [pageNumber, setPageNumber] = useState(0)
@@ -21,7 +21,7 @@ const Dairies = ({dispatch, privateEntries, currentPage } ) => {
     handlePageChange();
   }, []);
   const handlePageChange = (pageNumber) => {
-    dispatch(fetchUserPrivateEntries(pageNumber))
+    dispatch(fetchUserPublicEntries(pageNumber))
       .then(() => {
         console.log("success");
         setIsloading(false)
@@ -40,7 +40,7 @@ else if(isError){
 }
 else {
 
-const {entries} = privateEntries;
+const {entries} = publicEntries;
 const entryList =  entries.map(entry=>{
   return(
     <>
@@ -73,7 +73,7 @@ console.log(entries)
 const mapStateToProps = state => {
   console.log(state);
   return {
-    privateEntries: state.entries,
+    publicEntries: state.entries,
     currentPage:state.entries.currentPage
   };
 };

@@ -8,6 +8,7 @@ import EditProfile from "./components/edit-profile";
 import ViewEntry from "./components/view-entry"
 import Settings from "./components/reminder"
 import UserPrivateEntry from './components/profile/PrivateEntries'
+import UserPublicEntry from './components/profile/PublicEntries'
 import withAuthorization from './utils/withAuthorization'
 const App = () => {
   return (
@@ -41,7 +42,7 @@ const App = () => {
     <Route exact path="/entry-details/:entryId" component={withAuthorization(ViewEntry)} />
     <Route exact path="/profile/settings" component={withAuthorization(Settings)} />
     <Route exact path="/profile/private" component={withAuthorization(UserPrivateEntry)} />
-    <Route exact path="/profile/public" component={withAuthorization(UserPrivateEntry)} />
+    <Route exact path="/profile/public" component={withAuthorization(UserPublicEntry)} />
     <Route exact path="/add-entry" component={withAuthorization(AddEntry)} />
 </Switch>
         </body>
