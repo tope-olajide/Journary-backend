@@ -207,42 +207,13 @@ export default class Entry {
   }
 
   static async getUserPrivateEntries({
-    user
+    user, query
   }, res) {
-    const userId = user.id;
-    const text = 'SELECT * FROM entries WHERE is_private = $1 and user_id =$2';
-    const values = [
-      true, userId
-    ];
-    try {
-      const {
-        rows
-      } = await db.query(text, values);
-      if (!rows[0]) {
-        return res.status(200).json({
-          success: true,
-          message: 'diary not found',
-          entres: []
-        });
-      }
-      return res.status(200).json({
-        success: true,
-        message: 'Diary found',
-        diary: rows
-      });
-    } catch (error) {
-      return res.status(400).send(error);
-    }
-  }
-
-  static async getUserPublicEntries({
-    user
-  }, res) {
-    const userId = user.id;
-    const text = 'SELECT * FROM entries WHERE is_Private = $1 and user_id =$2';
-    const values = [
-      true, userId
-    ];
+    const limit = 7;
+    const currentPage = Number(query.page) || 1;
+    const offset = (currentPage - 1) * limit; const userId = user.id;
+    const text = 'SELECT entry_id,title,entry_image_url,content,view_count FROM entries  WHERE is_private =$1 and user_id =$4 LIMIT $2 OFFSET $3';
+    const values = ['true', limit, offset, userId];
     try {
       const {
         rows
@@ -251,13 +222,44 @@ export default class Entry {
         return res.status(200).json({
           success: false,
           message: 'diary not found',
-          entres: []
+          entries: []
+        })
+      }
+      return res.status(200).json({
+        success: true,
+        message: 'Diaries found',
+        entries: rows,
+        currentPage
+      });
+    } catch (error) {
+      return res.status(400).send(error);
+    }
+  }
+
+  static async getUserPublicEntries({
+    user, query
+  }, res) {
+    const limit = 7;
+    const currentPage = Number(query.page) || 1;
+    const offset = (currentPage - 1) * limit; const userId = user.id;
+    const text = 'SELECT entry_id,title,entry_image_url,content,username,view_count FROM entries INNER JOIN users ON users.user_id = entries.user_id WHERE is_private =$1 and user_id =$4 LIMIT $2 OFFSET $3';
+    const values = ['false', limit, offset, userId];
+    try {
+      const {
+        rows
+      } = await db.query(text, values);
+      if (!rows[0]) {
+        return res.status(200).json({
+          success: false,
+          message: 'diary not found',
+          entries: []
         });
       }
       return res.status(200).json({
         success: true,
-        message: 'Diary found',
-        diary: rows[0]
+        message: 'Diaries found',
+        entries: rows,
+        currentPage
       });
     } catch (error) {
       return res.status(400).send(error);
