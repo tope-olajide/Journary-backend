@@ -1,5 +1,7 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable require-jsdoc */
+import cron from 'node-cron';
+import nodemailer from 'nodemailer';
 import jsonwebtoken from 'jsonwebtoken';
 import db from '../db';
 import {
@@ -7,8 +9,15 @@ import {
   validateModifiedUser
 } from '../middleware/validator';
 import Encryption from '../middleware/encryption';
+import config from '../config/config'
 
-
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: config.email,
+    pass: config.password
+  }
+});
 const newEncryption = new Encryption();
 
 export default class User {
@@ -145,8 +154,8 @@ export default class User {
         message: validateUserDetails
       });
     }
-    const findUserQuery = 'SELECT * FROM users WHERE id=$1';
-    const updateUserQuery = 'UPDATE users SET fullname=$1,email=$2,about=$3,image=$4, returning *';
+    const findUserQuery = 'SELECT * FROM users WHERE user_id=$1';
+    const updateUserQuery = 'UPDATE users SET fullname=$1,email=$2,about=$3,user_image_url=$4 WHERE user_id=$5 returning *';
     try {
       const {
         rows
@@ -158,16 +167,30 @@ export default class User {
         });
       }
       const values = [
-        fullname || rows[0].fullname,
-        email || rows[0].email,
-        about || rows[0].about,
-        image || rows[0].image,
+        fullname,
+        email,
+        about,
+        image,
+        userId
       ];
+      const values2 = [
+        email,
+        userId
+      ];
+      const text = 'SELECT * FROM users WHERE email = $1 and user_id != $2';
+      const findDuplicateEmail = await db.query(text, values2);
+      if (findDuplicateEmail.rows[0]) {
+        return res.status(400).json({
+          success: false,
+          message: 'User with this email address exist already',
+          user: findDuplicateEmail.rows
+        });
+      }
       const response = await db.query(updateUserQuery, values);
       return res.status(200).json({
         success: true,
         message: 'User record updated',
-        response: response.row[0]
+        updatedUser: response.rows[0]
       });
     } catch (error) {
       return res.status(500).json({
@@ -185,8 +208,7 @@ export default class User {
     const text = 'SELECT * FROM users WHERE user_id = $1';
     const queryPrivateEntriesCount = 'SELECT COUNT(*) FROM entries WHERE is_Private = true and user_id =$1';
     const queryPublicEntriesCount = 'SELECT COUNT(*) FROM entries WHERE is_private = false and user_id =$1';
-    const values = [userId
-    ];
+    const values = [userId];
     try {
       const {
         rows
@@ -208,6 +230,79 @@ export default class User {
         privateEntriesCount: privateEntriesCount.rows[0].count,
         publicEntriesCount: publicEntriesCount.rows[0].count,
         totalEntriesCount
+      });
+    } catch (error) {
+      return res.status(400).send(error);
+    }
+  }
+
+  static async getReminderSettings({
+    user
+  }, res) {
+    const userId = user.id;
+    const text = 'SELECT notification_settings FROM users WHERE user_id = $1';
+    try {
+      const {
+        rows
+      } = await db.query(text, [userId]);
+      if (!rows[0].notification_settings) {
+        return res.status(200).json({
+          success: true,
+          message: 'reminder found',
+          reminder: 'Off'
+        });
+      }
+      return res.status(200).json({
+        success: true,
+        message: 'Reminder found',
+        reminder: rows[0].notification_settings,
+      });
+    } catch (error) {
+      return res.status(400).send(error);
+    }
+  }
+
+  static async setReminderSettings({
+    user,
+    body
+  }, res) {
+    const userId = user.id;
+    const {
+      schedule
+    } = body;
+
+
+    const updateNotificationSettingsQuery = 'UPDATE users SET notification_settings=$1 WHERE user_id=$2 returning *';
+    try {
+      const updatedUser = await db.query(updateNotificationSettingsQuery, [schedule, userId]);
+      const task = cron.schedule(schedule, () => {
+        console.log('---------------------');
+        console.log('Running Cron Job');
+        const mailOptions = {
+          from: `My Diary <noreply@my-diary.com>`,
+          to: updatedUser.rows[0].email,
+          subject: 'Reminder',
+          text: 'Hi there, this email was automatically sent by us in order to remind you to write a new diary today. To unsubscribe for this reminder, login to the app and turn it off from your settings'
+        };
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            throw error;
+          } else {
+            console.log('Email successfully sent!');
+          }
+        });
+      }, {
+        scheduled: false
+      });
+      if (schedule === 'Off') {
+        task.destroy();
+      } else {
+        task.start();
+      }
+      return res.status(200).json({
+        success: true,
+        message: 'Diaries found',
+        diary: updatedUser.rows[0]
       });
     } catch (error) {
       return res.status(400).send(error);
