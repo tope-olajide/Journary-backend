@@ -12,9 +12,6 @@ entry.use('*', newAuth.verify);
 entry.route('/search')
   .get(Entry.searchEntries);
 
-entry.route('/notifications-settings')
-  .post(Entry.setNotifications);
-
 entry.route('/')
   .post(Entry.addEntry)
   .get(Entry.getAllPublicEntries);

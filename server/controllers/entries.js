@@ -1,21 +1,11 @@
 /* eslint-disable no-console */
 /* eslint-disable require-jsdoc */
-import cron from 'node-cron';
-import nodemailer from 'nodemailer';
+
 import {
   validateEntry
 } from '../middleware/validator';
 import db from '../db';
-import config from '../config/config'
 
-
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: config.email,
-    pass: config.password
-  }
-});
 export default class Entry {
   static async addEntry({
     user,
@@ -32,7 +22,7 @@ export default class Entry {
       content,
     });
     if (validateEntryError) {
-      return res.status(400).json({
+      return res.status(400).json({ 
         success: false,
         message: validateEntryError
       });
@@ -334,50 +324,5 @@ export default class Entry {
     }
   }
 
-  static async setNotifications({
-    user,
-    body
-  }, res) {
-    const userId = user.id;
-    const {
-      schedule
-    } = body;
 
-
-    const updateNotificationSettingsQuery = 'UPDATE users SET notification_settings=$1 WHERE user_id=$2 returning *';
-    try {
-      const updatedUser = await db.query(updateNotificationSettingsQuery, [schedule, userId]);
-      const task = cron.schedule(schedule, () => {
-        console.log('---------------------');
-        console.log('Running Cron Job');
-        const mailOptions = {
-          from: `My Diary <noreply@my-diary.com>`,
-          to: updatedUser.rows[0].email,
-          subject: 'Reminder',
-          text: 'Hi there, this email was automatically sent by us in order to remind you to write a new diary today. To unsubscribe for this reminder, login to the app and turn it off from your settings'
-        };
-        transporter.sendMail(mailOptions, (error, info) => {
-          if (error) {
-            throw error;
-          } else {
-            console.log('Email successfully sent!');
-          }
-        });
-      }, {
-        scheduled: false
-      });
-      if (schedule === 'Off') {
-        task.destroy();
-      } else {
-        task.start();
-      }
-      return res.status(200).json({
-        success: true,
-        message: 'Diaries found',
-        diary: updatedUser.rows[0]
-      });
-    } catch (error) {
-      return res.status(400).send(error);
-    }
-  }
 }

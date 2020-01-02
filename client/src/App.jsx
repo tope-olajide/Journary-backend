@@ -6,7 +6,7 @@ import Profile from "./components/profile";
 import AddEntry from "./components/add-entry/index";
 import EditProfile from "./components/edit-profile";
 import ViewEntry from "./components/view-entry"
-import Settings from "./components/reminder"
+import Reminder from "./components/reminder"
 import UserPrivateEntry from './components/profile/PrivateEntries'
 import UserPublicEntry from './components/profile/PublicEntries'
 import withAuthorization from './utils/withAuthorization'
@@ -40,7 +40,7 @@ const App = () => {
     <Route exact path="/profile" component={withAuthorization(Profile)} />
     <Route exact path="/edit-profile" component={withAuthorization(EditProfile)} />
     <Route exact path="/entry-details/:entryId" component={withAuthorization(ViewEntry)} />
-    <Route exact path="/profile/settings" component={withAuthorization(Settings)} />
+    <Route exact path="/profile/reminder" component={withAuthorization(Reminder)} />
     <Route exact path="/profile/private" component={withAuthorization(UserPrivateEntry)} />
     <Route exact path="/profile/public" component={withAuthorization(UserPublicEntry)} />
     <Route exact path="/add-entry" component={withAuthorization(AddEntry)} />

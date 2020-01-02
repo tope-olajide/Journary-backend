@@ -1,35 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
-const thumbsContainer = {
+
+const thumb = {
     display: "flex",
-    flexDirection: "row",
-    alignContent: "center",
-    justifyContent: "center",
-    flexWrap: "wrap",
-    margin: "auto",
-    marginTop: 130,
-    width: "50%"
-  };
-  
-  const thumb = {
-    display: "inline-flex",
-    borderRadius: 2,
-    border: "1px solid #eaeaea",
-    marginBottom: 8,
-    marginRight: 8,
+    marginLeft: "58px",
     width: 280,
-    height: 160,
-    padding: 4,
+    height: 170,
     boxSizing: "border-box",
     position: "absolute",
-    top: 0,
-    left: "16%"
-  };
-  const drop = {
     borderWidth: 2,
-    borderColor: "#eaeaea",
+    borderColor: "blueviolet",
     borderStyle: "dashed",
-    borderRadius: 0
+  };
+  const thumbsContainer = {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginTop: 16,
+  
   };
   const thumbInner = {
     display: "flex",
@@ -39,11 +27,26 @@ const thumbsContainer = {
   
   const img = {
     display: "block",
-    width: "100%",
+    width: "auto",
     height: "100%"
   };
-const imageUpload=({files, setFiles})=>{
-   
+  const instruction = {
+    display: "flex",
+    borderWidth: 2,
+    borderColor: "blueviolet",
+    borderStyle: "dashed",
+    marginLeft: "58px",
+    width: 280,
+    height: 170,
+    boxSizing: "border-box",
+    position: "absolute",
+    color:'blueviolet',
+    
+  };
+  const section ={
+      marginBottom: '190px'
+  }
+const ProfileImageUpload=({files, setFiles})=>{
     const { getRootProps, getInputProps } = useDropzone({
         accept: "image/*",
         onDrop: acceptedFiles => {
@@ -71,16 +74,13 @@ const imageUpload=({files, setFiles})=>{
         [files]
       );
       return(<>
-     <section>
-        <aside style = {thumbsContainer}>
-        {thumbs}
-      </aside>
-      <div {...getRootProps()}>
-        <input {...getInputProps()} />
-        <p style={drop}>Drag 'n' drop some files here, or click to select files</p>
-      </div>
-    </section>
+            <section style={section}>
+              <div {...getRootProps()}>
+                <input {...getInputProps()} />
+                <div style={instruction}><h4>Drag 'n' drop your profile piture here, or click to select</h4></div><aside style={thumbsContainer}>{thumbs}</aside>
+              </div>
+            </section>
          
       </>)
 }
-export default imageUpload
+export default ProfileImageUpload

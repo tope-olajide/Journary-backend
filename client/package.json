@@ -9,6 +9,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "draft-js": "^0.10.5",
+    "jsonwebtoken": "^8.5.1",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-dropzone": "^10.0.5",

@@ -34,6 +34,7 @@ export default (state = initialState, action) => {
         entries: action.entries,
         currentPage: action.currentPage
       };
+
     default:
       return state;
   }

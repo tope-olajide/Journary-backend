@@ -4,7 +4,13 @@ import NavigationBar from "../commons/Navigation";
 import Footer from "../commons/Footer";
 import { fetchProfileDetails } from "../../actions/userActions";
 import { connect } from "react-redux";
-const Profile = ({ dispatch,userDetails,privateEntriesCount,publicEntriesCount,totalEntriesCount }) => {
+const Profile = ({
+  dispatch,
+  userDetails,
+  privateEntriesCount,
+  publicEntriesCount,
+  totalEntriesCount
+}) => {
   const [isDisplaySideNav, setIsDisplaySideNav] = useState(false);
   const toggleSideBar = () => {
     setIsDisplaySideNav(!isDisplaySideNav);
@@ -23,7 +29,7 @@ const Profile = ({ dispatch,userDetails,privateEntriesCount,publicEntriesCount,t
       .catch(error => {
         console.log("fail");
         setIsloading(false);
-        setIsError(true)
+        setIsError(true);
       });
   };
   if (isLoading) {
@@ -52,9 +58,9 @@ const Profile = ({ dispatch,userDetails,privateEntriesCount,publicEntriesCount,t
 const mapStateToProps = state => {
   console.log(state);
   return {
-    userDetails:state.users.userData[0],
-    privateEntriesCount:state.users.privateEntriesCount,
-    publicEntriesCount:state.users.publicEntriesCount,
+    userDetails: state.users.userData[0],
+    privateEntriesCount: state.users.privateEntriesCount,
+    publicEntriesCount: state.users.publicEntriesCount,
     totalEntriesCount: state.users.totalEntriesCount
   };
 };
