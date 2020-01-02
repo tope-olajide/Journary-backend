@@ -6,8 +6,6 @@ import {
 } from '../middleware/validator';
 import db from '../db';
 
-
-
 export default class Entry {
   static async addEntry({
     user,
@@ -24,7 +22,7 @@ export default class Entry {
       content,
     });
     if (validateEntryError) {
-      return res.status(400).json({
+      return res.status(400).json({ 
         success: false,
         message: validateEntryError
       });

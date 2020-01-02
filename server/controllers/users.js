@@ -53,6 +53,12 @@ export default class User {
             message: `${username} is already taken`
           });
         }
+        else if (rows[0].email.toUpperCase() === email.toUpperCase()) {
+          return res.status(400).json({
+            success: false,
+            message: `${email} is already taken`
+          });
+        }
         res.status(400).json({
           success: false,
           message: `${email} is already taken`
@@ -270,12 +276,12 @@ export default class User {
     const {
       schedule
     } = body;
-
+    console.log(schedule)
 
     const updateNotificationSettingsQuery = 'UPDATE users SET notification_settings=$1 WHERE user_id=$2 returning *';
     try {
       const updatedUser = await db.query(updateNotificationSettingsQuery, [schedule, userId]);
-      const task = cron.schedule(schedule, () => {
+     /*  const task = cron.schedule(schedule, () => {
         console.log('---------------------');
         console.log('Running Cron Job');
         const mailOptions = {
@@ -298,11 +304,12 @@ export default class User {
         task.destroy();
       } else {
         task.start();
-      }
+      } */
       return res.status(200).json({
         success: true,
         message: 'Diaries found',
-        diary: updatedUser.rows[0]
+        reminder: updatedUser.rows[0].notification_settings,
+        schedule
       });
     } catch (error) {
       return res.status(400).send(error);

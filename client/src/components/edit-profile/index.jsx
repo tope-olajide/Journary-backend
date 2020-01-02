@@ -129,9 +129,9 @@ const EditProfile = ({ dispatch, userDetails }) => {
               <ProfileImageUpload files={files} setFiles={setFiles} />
               <ProfileForm saveToState={saveToState} fullname={userDetails.fullname} email={userDetails.email} about={userDetails.about} />
               <SubmitButton
-                submitValue={submitValue}
-                handleSubmit={handleSubmit}
-                isLoading={isLoading}
+                submitValue= {submitValue}
+                handleSubmit= {handleSubmit}
+                isLoading= {isLoading}
               />
             </form>
           </div>

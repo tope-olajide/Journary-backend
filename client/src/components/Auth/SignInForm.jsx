@@ -23,7 +23,7 @@ const SignInForm = ({
             type="text"
             name="authname"
             defaultValue={authname}
-            onChange={event => {
+            onChange = { event => {
               saveSigninToState("authname", event.target.value);
             }}
           />

@@ -47,16 +47,17 @@ export const getReminderSettings=()=> {
         });
       });
 }
-export const saveReminder=()=> {
-  return dispatch => axios.post(`${url}set-reminder`,setHeaderToken)
+export const saveReminder=(schedule)=> {
+  console.log(schedule)
+  return dispatch => axios.post(`${url}set-reminder`,{schedule},setHeaderToken)
       .then((response) => {
           const {
-            reminder
+            schedule
           } = response.data;
-          console.log(reminder)
+          console.log(response.data)
           dispatch({
             type: SET_REMINDER_SETTINGS,
-            reminder
+            schedule
         });
       });
 }

@@ -3,7 +3,7 @@ import Details from "./Details";
 import { fetchUserEntryDetails } from "../../actions/entryActions";
 import { connect } from "react-redux";
 
-const viewEntry = ({ dispatch,entryDetails, match }) => {
+const viewEntry = ({ dispatch, entryDetails, match }) => {
   const [isLoading, setIsloading] = useState(true);
   const [isError, setIsError] = useState(false);
   useEffect(() => {

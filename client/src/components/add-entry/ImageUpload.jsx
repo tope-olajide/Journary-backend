@@ -72,7 +72,7 @@ const imageUpload=({files, setFiles})=>{
       );
       return(<>
      <section>
-              <aside style={thumbsContainer}>
+        <aside style = {thumbsContainer}>
         {thumbs}
       </aside>
       <div {...getRootProps()}>

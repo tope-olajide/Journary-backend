@@ -28,6 +28,7 @@ const [isError, setIsError] = useState(false);
 },[reminder]);
   const setState = event => {
     setSchedule(event.target.value);
+    console.log ( event.target.value)
   };
   const getReminder=()=>{
     dispatch(getReminderSettings())
@@ -66,7 +67,7 @@ const [isError, setIsError] = useState(false);
         <div class="profile-header">
           <br />
           <br />
-          <form onSubmit={null}>
+          <form>
             <h3>Email Notifications Settings</h3>
             <ul>
               <li>
@@ -136,12 +137,12 @@ const [isError, setIsError] = useState(false);
                 </label>
               </li>
             </ul>
-            <SubmitButton
+            
+          </form><SubmitButton
                 submitValue={submitValue}
                 handleSubmit={setReminder}
                 isLoading={isLoading}
               />
-          </form>
           ;
         </div>
         <Footer />
