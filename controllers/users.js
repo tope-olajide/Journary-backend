@@ -4,12 +4,9 @@ import cron from 'node-cron';
 import nodemailer from 'nodemailer';
 import jsonwebtoken from 'jsonwebtoken';
 import db from '../db';
-import {
-  validateUser,
-  validateModifiedUser
-} from '../middleware/validator';
+import validateUser from '../utils/validateSignUpData';
 import Encryption from '../middleware/encryption';
-import config from '../config/config'
+import config from '../config/config';
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -28,58 +25,45 @@ export default class User {
       password,
       email
     } = req.body;
-    const signUpError = validateUser({
-      fullname,
-      username,
-      password,
-      email
+
+    const validateUserDetails = validateUser({
+      fullname, username, password, email
     });
-    if (signUpError) {
+    if (validateUserDetails[0] === false) {
       return res.status(400).json({
         success: false,
-        message: signUpError
+        message: validateUserDetails[1]
       });
     }
     const text = 'SELECT * FROM users WHERE username = $1 OR email =$2';
     const values = [username, email];
     try {
-      const {
-        rows
-      } = await db.query(text, values);
-      if (rows[0]) {
-        if (rows[0].username.toUpperCase() === username.toUpperCase()) {
+      const usernameOrEmail = await db.query(text, values);
+      if (usernameOrEmail.rows[0]) {
+        if (usernameOrEmail.rows[0].username.toUpperCase() === username.toUpperCase()) {
           return res.status(400).json({
             success: false,
             message: `${username} is already taken`
           });
         }
-        else if (rows[0].email.toUpperCase() === email.toUpperCase()) {
+        if (usernameOrEmail.rows[0].email.toUpperCase() === email.toUpperCase()) {
           return res.status(400).json({
             success: false,
             message: `${email} is already taken`
           });
         }
-        res.status(400).json({
-          success: false,
-          message: `${email} is already taken`
-        });
       }
-    } catch (error) {
-      return res.status(400).send(error);
-    }
-    const encryptedPassword = newEncryption.generateHash(password);
-    const text2 = `INSERT INTO
+      const encryptedPassword = newEncryption.generateHash(password);
+      const text2 = `INSERT INTO
     users(fullname, username, password, email)
       VALUES($1, $2, $3, $4)
       returning *`;
-    const values2 = [
-      fullname,
-      username,
-      encryptedPassword,
-      email
-    ];
-
-    try {
+      const values2 = [
+        fullname,
+        username,
+        encryptedPassword,
+        email
+      ];
       const {
         rows
       } = await db.query(text2, values2);
@@ -101,7 +85,7 @@ export default class User {
   }
 
   static async signInUser(req, res) {
-    const authName = req.body.authname;
+    const { authName } = req.body;
     const text = 'SELECT * FROM users WHERE username = $1 OR email =$1';
     const values = [authName];
     try {
@@ -112,7 +96,8 @@ export default class User {
       if (!result) {
         return res.status(401).json({
           success: false,
-          message: 'user not found'
+          message: 'user not found',
+          result
         });
       }
       if (newEncryption.verifyHash(req.body.password, result.password)) {
@@ -276,12 +261,12 @@ export default class User {
     const {
       schedule
     } = body;
-    console.log(schedule)
+    console.log(schedule);
 
     const updateNotificationSettingsQuery = 'UPDATE users SET notification_settings=$1 WHERE user_id=$2 returning *';
     try {
       const updatedUser = await db.query(updateNotificationSettingsQuery, [schedule, userId]);
-     /*  const task = cron.schedule(schedule, () => {
+      /*  const task = cron.schedule(schedule, () => {
         console.log('---------------------');
         console.log('Running Cron Job');
         const mailOptions = {
