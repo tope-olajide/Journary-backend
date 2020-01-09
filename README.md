@@ -1,6 +1,6 @@
-# My-Diary
+# Journary
 
-MyDiary is an online journal where users can pen down their thoughts and feelings. 
+Journary is an online journal where users can pen down their thoughts and feelings. 
 
 # Features
 1. Users can create an account and log in.  
