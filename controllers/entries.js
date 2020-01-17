@@ -13,7 +13,7 @@ export default class Entry {
   }, res) {
     const userId = user.id;
     const {
-      entryImageUrl,
+      featureImageUrl,
       title,
       content,
     } = body;
@@ -31,7 +31,7 @@ export default class Entry {
         VALUES($1, $2, $3, $4)
         returning *`;
     const values = [
-      entryImageUrl,
+      featureImageUrl,
       title,
       content,
       userId
@@ -65,7 +65,7 @@ export default class Entry {
       entryId
     } = params;
     const {
-      entryImageUrl,
+      featureImageUrl,
       title,
       content,
       isPrivate
@@ -99,7 +99,7 @@ export default class Entry {
         });
       }
       const values = [
-        entryImageUrl || rows[0].entry_image_url,
+        featureImageUrl || rows[0].entry_image_url,
         title || rows[0].title,
         content || rows[0].content,
         isPrivate || rows[0].is_private,
