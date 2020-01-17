@@ -117,7 +117,7 @@ export default class User {
         message: 'Invalid pasword!'
       });
     } catch (error) {
-      return res.status(400).res.status(500).json({
+      return res.status(500).json({
         success: false,
         message: 'An error occured'
       });
