@@ -22,13 +22,13 @@ export default class Entry {
       content,
     });
     if (validateEntryError) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
         message: validateEntryError
       });
     }
     const text = `INSERT INTO entries (entry_image_url, title, content, user_id)
-        VALUES($1, $2, $3, $4)
+        VALUES ($1, $2, $3, $4)
         returning *`;
     const values = [
       featureImageUrl,
@@ -146,13 +146,11 @@ export default class Entry {
           message: 'You cannot delete diary not created by You!'
         });
       }
-      const deleteDairy = await db.query(deleteQuery, [entryId]);
-      if (deleteDairy.rows[0]) {
-        res.status(200).json({
-          success: true,
-          message: 'Diary Deleted successfully!'
-        });
-      }
+      await db.query(deleteQuery, [entryId]);
+      res.status(200).json({
+        success: true,
+        message: 'Diary Deleted successfully!'
+      });
     } catch (error) {
       return res.status(400).send(error);
     }
@@ -167,7 +165,7 @@ export default class Entry {
       entryId
     } = params;
     const text = 'SELECT * FROM entries WHERE entry_id = $1';
-    const updateViewCountQuery = 'UPDATE entries SET view_count = view_count + 1 WHERE entry_id = $1 '
+    const updateViewCountQuery = 'UPDATE entries SET view_count = view_count + 1 WHERE entry_id = $1 ';
     try {
       const {
         rows
@@ -213,7 +211,7 @@ export default class Entry {
           success: false,
           message: 'diary not found',
           entries: []
-        })
+        });
       }
       return res.status(200).json({
         success: true,
@@ -323,6 +321,4 @@ export default class Entry {
       return res.status(400).send(error);
     }
   }
-
-
 }
