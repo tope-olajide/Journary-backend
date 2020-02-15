@@ -6,13 +6,7 @@ export default {
     const usersSchema = `
     CREATE TABLE IF NOT EXISTS users (
       user_id SERIAL PRIMARY KEY,
-      email TEXT NOT NULL UNIQUE,
-      fullname TEXT NOT NULL,
-      about TEXT,
-      username VARCHAR(255) NOT NULL UNIQUE,
-      password TEXT NOT NULL,
-      user_image_url TEXT,
-      notification_settings TEXT DEFAULT Off 
+
     );
     `;
     return database.query(usersSchema);
