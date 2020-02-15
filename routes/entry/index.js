@@ -27,5 +27,5 @@ entry.route('/:entryId')
   .delete(Entry.deleteEntry)
   .get(Entry.viewEntry);
 
-
+entry.get('/get-entry/:entryId', Entry.getEntry);
 export default entry;
