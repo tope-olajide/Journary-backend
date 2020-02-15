@@ -5,6 +5,7 @@ import nodemailer from 'nodemailer';
 import jsonwebtoken from 'jsonwebtoken';
 import db from '../db';
 import validateUser from '../utils/validateSignUpData';
+import validateModifiedUser from '../utils/validateModifiedUserData';
 import Encryption from '../middleware/encryption';
 import config from '../config/config';
 
@@ -71,8 +72,8 @@ export default class User {
       const token = jsonwebtoken.sign({
         id: result.user_id,
         username: result.username,
-        expiresIn: '24h'
-      }, 'config.jwtSecret');
+        expiresIn: Math.floor(Date.now() / 1000) + (60 * 60 * 24)
+      }, config.jwtSecret);
       return res.status(201).json({
         success: true,
         message: 'New user created/token generated!',
@@ -104,8 +105,8 @@ export default class User {
         const token = jsonwebtoken.sign({
           id: result.user_id,
           username: result.username,
-          expiresIn: '24h'
-        }, 'config.jwtSecret');
+          expiresIn: Math.floor(Date.now() / 1000) + (60 * 60 * 24)
+        }, config.jwtSecret);
         return res.status(200).json({
           success: true,
           message: 'User Signed In/token generated!',
@@ -133,16 +134,15 @@ export default class User {
       fullname,
       email,
       about,
-      image
+      imageUrl,
     } = body;
     const validateUserDetails = validateModifiedUser({
-      fullname,
-      email
+      fullname, email, about
     });
-    if (validateUserDetails) {
+    if (validateUserDetails[0] === false) {
       return res.status(400).json({
         success: false,
-        message: validateUserDetails
+        message: validateUserDetails[1]
       });
     }
     const findUserQuery = 'SELECT * FROM users WHERE user_id=$1';
@@ -161,7 +161,7 @@ export default class User {
         fullname,
         email,
         about,
-        image,
+        imageUrl,
         userId
       ];
       const values2 = [
@@ -177,13 +177,15 @@ export default class User {
           user: findDuplicateEmail.rows
         });
       }
+
       const response = await db.query(updateUserQuery, values);
       return res.status(200).json({
         success: true,
         message: 'User record updated',
-        updatedUser: response.rows[0]
+        updatedUser: response.rows[0],
       });
     } catch (error) {
+      console.log(error);
       return res.status(500).json({
         success: false,
         message: "Error Updating user's profile",
@@ -204,9 +206,9 @@ export default class User {
       const {
         rows
       } = await db.query(text, values);
-      const privateEntriesCount = await db.query(queryPrivateEntriesCount, values);
-      const publicEntriesCount = await db.query(queryPublicEntriesCount, values);
-      const totalEntriesCount = parseInt(privateEntriesCount.rows[0].count, 10) + parseInt(publicEntriesCount.rows[0].count, 10);
+      const privateEntries = await db.query(queryPrivateEntriesCount, values);
+      const publicEntries = await db.query(queryPublicEntriesCount, values);
+      const totalEntriesCount = parseInt(privateEntries.rows[0].count, 10) + parseInt(publicEntries.rows[0].count, 10);
       if (!rows[0]) {
         return res.status(404).json({
           success: true,
@@ -214,12 +216,13 @@ export default class User {
           entry: []
         });
       }
+      console.log(rows);
       return res.status(200).json({
         success: true,
         message: 'User found',
         userData: rows,
-        privateEntriesCount: privateEntriesCount.rows[0].count,
-        publicEntriesCount: publicEntriesCount.rows[0].count,
+        privateEntriesCount: privateEntries.rows[0].count,
+        publicEntriesCount: publicEntries.rows[0].count,
         totalEntriesCount
       });
     } catch (error) {
@@ -266,14 +269,14 @@ export default class User {
     const updateNotificationSettingsQuery = 'UPDATE users SET notification_settings=$1 WHERE user_id=$2 returning *';
     try {
       const updatedUser = await db.query(updateNotificationSettingsQuery, [schedule, userId]);
-      /*  const task = cron.schedule(schedule, () => {
+      const task = cron.schedule(schedule, () => {
         console.log('---------------------');
         console.log('Running Cron Job');
         const mailOptions = {
-          from: `My Diary <noreply@my-diary.com>`,
+          from: 'My Diary <noreply@journary.com>',
           to: updatedUser.rows[0].email,
           subject: 'Reminder',
-          text: 'Hi there, this email was automatically sent by us in order to remind you to write a new diary today. To unsubscribe for this reminder, login to the app and turn it off from your settings'
+          html: '<h1>Hi there</h1>, <p>This email was automatically sent by me from Journary to automatically remind you to write a new diary today.</p> <p>To unsubscribe for this reminder, login to the app and turn it off from your profile</p>'
         };
         transporter.sendMail(mailOptions, (error, info) => {
           if (error) {
@@ -289,7 +292,7 @@ export default class User {
         task.destroy();
       } else {
         task.start();
-      } */
+      }
       return res.status(200).json({
         success: true,
         message: 'Diaries found',
@@ -297,6 +300,7 @@ export default class User {
         schedule
       });
     } catch (error) {
+      console.log(error);
       return res.status(400).send(error);
     }
   }
