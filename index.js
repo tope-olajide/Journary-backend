@@ -35,7 +35,7 @@ app.post('*', (req, res) => {
     message: 'invalid link'
   });
 });
-const port = 9000;
-app.listen(port, () => logger.info(`We're up and running on port ${port}`));
+const port = parseInt(process.env.PORT, 10) || 9000;
+app.listen(port, '0.0.0.0', () => logger.info(`We're up and running on port ${port}`));
 
 export default app;
