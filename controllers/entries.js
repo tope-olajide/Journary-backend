@@ -41,6 +41,7 @@ export default class Entry {
         rows
       } = await db.query(text, values);
       const entry = rows[0];
+      console.log(entry)
       return res.status(201).json({
         success: true,
         message: 'New Entry created',
@@ -183,7 +184,48 @@ export default class Entry {
           message: 'You cannot view an entry that was not created by you'
         });
       }
-      const updateQuery = await db.query(updateViewCountQuery, [entryId]);
+      let isOwner;
+      if (rows[0].user_id === userId) {
+        isOwner = true;
+      } else { isOwner = false; }
+      await db.query(updateViewCountQuery, [entryId]);
+      return res.status(200).json({
+        success: true,
+        message: 'Diary found',
+        entry: rows,
+        isOwner
+      });
+    } catch (error) {
+      return res.status(400).send(error);
+    }
+  }
+
+  static async getEntry({
+    params,
+    user
+  }, res) {
+    const userId = user.id;
+    const {
+      entryId
+    } = params;
+    const text = 'SELECT * FROM entries WHERE entry_id = $1';
+    try {
+      const {
+        rows
+      } = await db.query(text, [entryId]);
+      if (!rows[0]) {
+        return res.status(404).json({
+          success: true,
+          message: 'diary not found',
+          entry: []
+        });
+      }
+      if (rows[0].is_private === true && rows[0].user_id !== userId) {
+        return res.status(401).json({
+          success: false,
+          message: 'You cannot view an entry that was not created by you'
+        });
+      }
       return res.status(200).json({
         success: true,
         message: 'Diary found',
@@ -255,7 +297,7 @@ export default class Entry {
   }
 
   static async getAllPublicEntries(req, res) {
-    const limit = 7;
+    const limit = 10;
     const currentPage = Number(req.query.page) || 1;
     const offset = (currentPage - 1) * limit;
     const text = 'SELECT entry_id,title,entry_image_url,content,username,view_count FROM entries INNER JOIN users ON users.user_id = entries.user_id WHERE is_private =$1 LIMIT $2 OFFSET $3';
