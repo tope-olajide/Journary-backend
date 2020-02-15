@@ -11,7 +11,7 @@ import logger from '../helpers/logger';
   if (res) logger.info('Entries table successfully migrated');
 })().catch(err => logger.info(err.message));
 
-(async () => {
+(async () => { 
   const res = await schema.createImageGalleries();
   if (res) logger.info('ImageGalleries table successfully migrated');
 })().catch(err => logger.info(err.message));
