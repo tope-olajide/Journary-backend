@@ -17,6 +17,17 @@ export default {
     `;
     return database.query(usersSchema);
   },
+  createImageGalleries() {
+    const galleriesSchema = `
+    CREATE TABLE IF NOT EXISTS image_galleries (
+      gallery_id SERIAL PRIMARY KEY,
+      user_id INTEGER REFERENCES users(user_id),
+      image_id TEXT NOT NULL,
+      image_url TEXT NOT NULL
+    );
+    `;
+    return database.query(galleriesSchema);
+  },
   createEntries() {
     const entriesSchema = `
     CREATE TABLE IF NOT EXISTS entries (
@@ -33,16 +44,4 @@ export default {
     `;
     return database.query(entriesSchema);
   },
-  createImageGalleries() {
-    const galleriesSchema = `
-    CREATE TABLE IF NOT EXISTS image_galleries (
-      gallery_id SERIAL PRIMARY KEY,
-      user_id INTEGER REFERENCES users(user_id),
-      image_id TEXT NOT NULL,
-      image_url TEXT NOT NULL
-    );
-    `;
-    return database.query(galleriesSchema);
-  },
-
 };
