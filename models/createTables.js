@@ -12,7 +12,7 @@ export default {
       username VARCHAR(255) NOT NULL UNIQUE,
       password TEXT NOT NULL,
       user_image_url TEXT,
-      notification_settings TEXT DEFAULT "Off" 
+      notification_settings TEXT DEFAULT 'Off' 
     );
     `;
     return database.query(usersSchema);
