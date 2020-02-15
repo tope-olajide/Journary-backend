@@ -17,7 +17,7 @@ export default {
     `;
     return database.query(usersSchema);
   },
-  createImageGalleries() {
+ /*  createImageGalleries() {
     const galleriesSchema = `
     CREATE TABLE IF NOT EXISTS image_galleries (
       gallery_id SERIAL PRIMARY KEY,
@@ -43,5 +43,5 @@ export default {
     );
     `;
     return database.query(entriesSchema);
-  },
+  }, */
 };
