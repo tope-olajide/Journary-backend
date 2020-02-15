@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec babel-node index.js",
-    "migrate": "babel-node models/index "
+    "start": "babel-node index.js",
+    "migrate": "babel-node models/index ",
+    "run": "nodemon --exec babel-node index.js",
   },
   "keywords": [],
   "author": "Temitope Olajide",
