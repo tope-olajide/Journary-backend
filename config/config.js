@@ -12,7 +12,7 @@ const config = {
     port: process.env.DB_PORT,
   },
   production: {
-    DATABASE_URL: process.env.DATABASE_URL
+    connectionString: process.env.DATABASE_URL,
   },
   jwtSecret: process.env.JWT_SECRET,
   email: process.env.email,

@@ -4,7 +4,7 @@ import {
 import logger from '../helpers/logger';
 import config from './config';
 
-const database = new Pool(config.production.url);
+const database = new Pool(config.production);
 (async () => {
   const res = await database.connect();
   if (res) return logger.info('connection successful');
