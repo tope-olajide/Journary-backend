@@ -12,11 +12,7 @@ const config = {
     port: process.env.DB_PORT,
   },
   production: {
-    url: process.env.POSTGRESQL_ADDON_URI,
-    database: process.env.POSTGRESQL_ADDON_DB,
-    user: process.env.POSTGRESQL_ADDON_USER,
-    password: process.env.POSTGRESQL_ADDON_PASSWORD,
-    host: process.env.POSTGRESQL_ADDON_HOST,
+    DATABASE_URL: process.env.DATABASE_URL
   },
   jwtSecret: process.env.JWT_SECRET,
   email: process.env.email,

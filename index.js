@@ -17,8 +17,8 @@ app.use(bodyParser.json(), bodyParser.urlencoded({
 app.use('/api/', routes);
 app.get('/', (req, res) => {
   res.status(201).json({
-    title: 'My-Diary',
-    message: 'Welcome to My-Diary App!'
+    title: 'Journary - Backend',
+    message: 'Welcome to my Journary App!'
   });
 });
 
