@@ -81,7 +81,12 @@ export default class User {
         token
       });
     } catch (error) {
-      return res.status(400).send(error);
+      console.error(error)
+      return res.status(500).json({
+        success: false,
+        message: 'An error occured',
+        error
+      });
     }
   }
 
@@ -118,9 +123,11 @@ export default class User {
         message: 'Invalid pasword!'
       });
     } catch (error) {
+      console.error(error)
       return res.status(500).json({
         success: false,
-        message: 'An error occured'
+        message: 'An error occured',
+        error
       });
     }
   }
