@@ -35,7 +35,7 @@ app.post('*', (req, res) => {
     message: 'invalid link'
   });
 });
-const port =  9000;
+const port =  process.env.PORT || 8080;
 app.listen(port, () => logger.info(`We're up and running on port ${port}`));
 
 export default app;
