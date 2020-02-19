@@ -56,7 +56,7 @@ export default class ImageGallery {
         rows
       } = await db.query(fetchGalleriesQuery, [userId]);
       if (!rows[0]) {
-        return res.status(404).json({
+        return res.status(204).json({
           success: false,
           message: 'No image found'
         });
