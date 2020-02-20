@@ -295,12 +295,11 @@ export default class User {
           }
         });
       }, {
-        scheduled: false
+        scheduled: true
       });
       if (schedule === 'Off') {
         task.destroy();
       } else {
-        task.destroy();
         task.start();
       }
       return res.status(200).json({
