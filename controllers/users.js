@@ -297,10 +297,10 @@ export default class User {
       }, {
         scheduled: false
       });
-      if (schedule == 'Off') {
-        task.stop();
+      if (schedule === 'Off') {
         task.destroy();
       } else {
+        task.destroy();
         task.start();
       }
       return res.status(200).json({
