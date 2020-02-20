@@ -278,7 +278,7 @@ export default class User {
     const updateNotificationSettingsQuery = 'UPDATE users SET notification_settings=$1 WHERE user_id=$2 returning *';
     try {
       const updatedUser = await db.query(updateNotificationSettingsQuery, [schedule, userId]);
-      const task = scheduler.scheduleJob(`user${userId}`, schedule, () => {
+      scheduler.scheduleJob(`user00${userId}`, schedule, () => {
         console.log('---------------------');
         console.log('Running Cron Job');
         const mailOptions = {
@@ -296,7 +296,7 @@ export default class User {
         });
       });
 
-      const job = schedule.scheduledJobs[`user${userId}`];
+      const job = scheduler.scheduledJobs[`user${userId}`];
       if (schedule === 'Off') {
         job.cancel();
       } else {
