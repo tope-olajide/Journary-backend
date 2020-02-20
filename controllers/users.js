@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable require-jsdoc */
-import cron from 'node-cron';
+import scheduler from 'node-schedule';
 import nodemailer from 'nodemailer';
 import jsonwebtoken from 'jsonwebtoken';
 import db from '../db';
@@ -83,7 +83,7 @@ export default class User {
         token
       });
     } catch (error) {
-      console.error(error)
+      console.error(error);
       return res.status(500).json({
         success: false,
         message: 'An error occured',
@@ -125,7 +125,7 @@ export default class User {
         message: 'Invalid pasword!'
       });
     } catch (error) {
-      console.error(error)
+      console.error(error);
       return res.status(500).json({
         success: false,
         message: 'An error occured',
@@ -278,14 +278,14 @@ export default class User {
     const updateNotificationSettingsQuery = 'UPDATE users SET notification_settings=$1 WHERE user_id=$2 returning *';
     try {
       const updatedUser = await db.query(updateNotificationSettingsQuery, [schedule, userId]);
-      const task = cron.schedule(schedule, () => {
+      const task = scheduler.scheduleJob(schedule, () => {
         console.log('---------------------');
         console.log('Running Cron Job');
         const mailOptions = {
           from: 'My Diary <noreply@journary.com>',
           to: updatedUser.rows[0].email,
           subject: 'Reminder',
-          html: '<h1>Hi there,</h1> <p>This email was automatically sent by me from Journary to automatically remind you to write a new diary today.</p> <p>To unsubscribe for this reminder, login to the app and turn it off from your profile</p>'
+          html: '<h1>Hi there</h1>, <p>This email was automatically sent by me from Journary to automatically remind you to write a new diary today.</p> <p>To unsubscribe for this reminder, login to the app and turn it off from your profile</p>'
         };
         transporter.sendMail(mailOptions, (error, info) => {
           if (error) {
@@ -294,14 +294,11 @@ export default class User {
             console.log('Email successfully sent!');
           }
         });
-      }, {
-        scheduled: true
       });
-      task.destroy();
       if (schedule === 'Off') {
-        task.destroy();
+        task.cancel();
       } else {
-        task.start();
+        task.reschedule(schedule);
       }
       return res.status(200).json({
         success: true,
