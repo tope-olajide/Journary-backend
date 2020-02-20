@@ -297,6 +297,7 @@ export default class User {
       }, {
         scheduled: true
       });
+      task.destroy();
       if (schedule === 'Off') {
         task.destroy();
       } else {
