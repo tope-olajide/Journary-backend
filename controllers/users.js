@@ -282,7 +282,7 @@ export default class User {
         console.log('---------------------');
         console.log('Running Cron Job');
         const mailOptions = {
-          from: 'My Diary <noreply@journary.com>',
+          from: 'Journary <noreply@journary.com>',
           to: updatedUser.rows[0].email,
           subject: 'Reminder',
           html: '<h1>Hi there</h1>, <p>This email was automatically sent by me from Journary to automatically remind you to write a new diary today.</p> <p>To unsubscribe for this reminder, login to the app and turn it off from your profile</p>'
