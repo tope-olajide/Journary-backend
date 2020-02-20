@@ -285,7 +285,7 @@ export default class User {
           from: 'My Diary <noreply@journary.com>',
           to: updatedUser.rows[0].email,
           subject: 'Reminder',
-          html: '<h1>Hi there</h1>, <p>This email was automatically sent by me from Journary to automatically remind you to write a new diary today.</p> <p>To unsubscribe for this reminder, login to the app and turn it off from your profile</p>'
+          html: '<h1>Hi there,</h1> <p>This email was automatically sent by me from Journary to automatically remind you to write a new diary today.</p> <p>To unsubscribe for this reminder, login to the app and turn it off from your profile</p>'
         };
         transporter.sendMail(mailOptions, (error, info) => {
           if (error) {
@@ -297,7 +297,8 @@ export default class User {
       }, {
         scheduled: false
       });
-      if (schedule === 'Off') {
+      if (schedule == 'Off') {
+        task.stop();
         task.destroy();
       } else {
         task.start();
