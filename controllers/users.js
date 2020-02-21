@@ -271,19 +271,27 @@ export default class User {
   }, res) {
     const userId = user.id;
     const {
-      time
+      time, isRunning
     } = body;
-    console.log(time);
+    console.log(time, isRunning);
 
     const updateNotificationSettingsQuery = 'UPDATE users SET notification_settings=$1 WHERE user_id=$2 returning *';
     try {
-      const userTimeId = `user00${userId}`
-      const updatedUser = await db.query(updateNotificationSettingsQuery, [time, userId]);
-      const task = schedule.scheduleJob(userTimeId, time, () => {
-        console.log('---------------------');
-        console.log('Running Cron Job');
-        console.log(`the time is ${time}`);
-        console.log(`the ID is ${userTimeId}`);
+      const userTimeId = `user00${userId}`;
+      const updatedUser = await db.query(updateNotificationSettingsQuery, [schedule, userId]);
+      if (isRunning) {
+        const userJob = schedule.scheduledJobs.userTimeId;
+        if (time === 'Off') {
+          userJob.cancel();
+        }
+        userJob.reschedule(time);
+      }
+      if (time !== 'Off') {
+        const task = schedule.scheduleJob(userTimeId, time, () => {
+          console.log('---------------------');
+          console.log('Running Cron Job');
+          console.log(`the time is ${time}`);
+          console.log(`the ID is ${userTimeId}`);
 
         /*         const mailOptions = {
           from: 'Journary <noreply@journary.com>',
@@ -298,13 +306,14 @@ export default class User {
             console.log('Email successfully sent!');
           }
         }); */
-      });
-      if (time === 'Off') {
+        });
+      }
+      /*       if (time === 'Off') {
         setTimeout(() => {
           const userJob = schedule.scheduledJobs.userTimeId;
           userJob.cancel();
         }, 2000);
-      } /* setTimeout(() => {
+      } */ /* setTimeout(() => {
         const userJob = schedule.scheduledJobs.userTimeId;
         userJob.reschedule(time);
       }, 2000); */
