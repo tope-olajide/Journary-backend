@@ -278,7 +278,7 @@ export default class User {
     const updateNotificationSettingsQuery = 'UPDATE users SET notification_settings=$1 WHERE user_id=$2 returning *';
     try {
       const userTimeId = `user00${userId}`
-      const updatedUser = await db.query(updateNotificationSettingsQuery, [schedule, userId]);
+      const updatedUser = await db.query(updateNotificationSettingsQuery, [time, userId]);
       const task = schedule.scheduleJob(userTimeId, time, () => {
         console.log('---------------------');
         console.log('Running Cron Job');
