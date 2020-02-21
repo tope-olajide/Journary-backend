@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable require-jsdoc */
-import scheduler from 'node-schedule';
+import schedule from 'node-schedule';
 import nodemailer from 'nodemailer';
 import jsonwebtoken from 'jsonwebtoken';
 import db from '../db';
@@ -271,17 +271,21 @@ export default class User {
   }, res) {
     const userId = user.id;
     const {
-      schedule
+      time
     } = body;
-    console.log(schedule);
+    console.log(time);
 
     const updateNotificationSettingsQuery = 'UPDATE users SET notification_settings=$1 WHERE user_id=$2 returning *';
     try {
+      const userTimeId = `user00${userId}`
       const updatedUser = await db.query(updateNotificationSettingsQuery, [schedule, userId]);
-      const task = scheduler.scheduleJob(/* `user${userId}` */schedule, () => {
+      const task = schedule.scheduleJob(userTimeId, time, () => {
         console.log('---------------------');
         console.log('Running Cron Job');
-        const mailOptions = {
+        console.log(`the time is ${time}`);
+        console.log(`the ID is ${userTimeId}`);
+
+        /*         const mailOptions = {
           from: 'Journary <noreply@journary.com>',
           to: updatedUser.rows[0].email,
           subject: 'Reminder',
@@ -293,18 +297,22 @@ export default class User {
           } else {
             console.log('Email successfully sent!');
           }
-        });
+        }); */
       });
-      if (schedule === 'Off') {
-        task.cancel();
-      } else {
-        task.reschedule(schedule);
-      }
+      if (time === 'Off') {
+        setTimeout(() => {
+          const userJob = schedule.scheduledJobs.userTimeId;
+          userJob.cancel();
+        }, 2000);
+      } setTimeout(() => {
+        const userJob = schedule.scheduledJobs.userTimeId;
+        userJob.reschedule(time);
+      }, 2000);
       return res.status(200).json({
         success: true,
         message: 'Diaries found',
         reminder: updatedUser.rows[0].notification_settings,
-        schedule
+        time
       });
     } catch (error) {
       console.log(error);
