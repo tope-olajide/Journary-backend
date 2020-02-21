@@ -304,10 +304,10 @@ export default class User {
           const userJob = schedule.scheduledJobs.userTimeId;
           userJob.cancel();
         }, 2000);
-      } setTimeout(() => {
+      } /* setTimeout(() => {
         const userJob = schedule.scheduledJobs.userTimeId;
         userJob.reschedule(time);
-      }, 2000);
+      }, 2000); */
       return res.status(200).json({
         success: true,
         message: 'Diaries found',
