@@ -8,6 +8,7 @@ import validateUser from '../utils/validateSignUpData';
 import validateModifiedUser from '../utils/validateModifiedUserData';
 import Encryption from '../middleware/encryption';
 import config from '../config/config';
+import scheduleTask, { cancelTask } from '../utils/scheduler';
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -74,6 +75,7 @@ export default class User {
       const token = jsonwebtoken.sign({
         id: result.user_id,
         username: result.username,
+        email: result.email,
         expiresIn: Math.floor(Date.now() / 1000) + (60 * 60 * 24)
       }, config.jwtSecret);
       return res.status(201).json({
@@ -112,6 +114,7 @@ export default class User {
         const token = jsonwebtoken.sign({
           id: result.user_id,
           username: result.username,
+          email: result.email,
           expiresIn: Math.floor(Date.now() / 1000) + (60 * 60 * 24)
         }, config.jwtSecret);
         return res.status(200).json({
@@ -235,96 +238,6 @@ export default class User {
         totalEntriesCount
       });
     } catch (error) {
-      return res.status(400).send(error);
-    }
-  }
-
-  static async getReminderSettings({
-    user
-  }, res) {
-    const userId = user.id;
-    const text = 'SELECT notification_settings FROM users WHERE user_id = $1';
-    try {
-      const {
-        rows
-      } = await db.query(text, [userId]);
-      if (!rows[0].notification_settings) {
-        return res.status(200).json({
-          success: true,
-          message: 'reminder found',
-          reminder: 'Off'
-        });
-      }
-      return res.status(200).json({
-        success: true,
-        message: 'Reminder found',
-        reminder: rows[0].notification_settings,
-      });
-    } catch (error) {
-      return res.status(400).send(error);
-    }
-  }
-
-  static async setReminderSettings({
-    user,
-    body
-  }, res) {
-    const userId = user.id;
-    const {
-      time, isRunning
-    } = body;
-    console.log(time, isRunning);
-
-    const updateNotificationSettingsQuery = 'UPDATE users SET notification_settings=$1 WHERE user_id=$2 returning *';
-    try {
-      const userTimeId = `user00${userId}`;
-      const updatedUser = await db.query(updateNotificationSettingsQuery, [schedule, userId]);
-      if (isRunning) {
-        const userJob = schedule.scheduledJobs.userTimeId;
-        if (time === 'Off') {
-          userJob.cancel();
-        }
-        userJob.reschedule(time);
-      }
-      if (time !== 'Off') {
-        const task = schedule.scheduleJob(userTimeId, time, () => {
-          console.log('---------------------');
-          console.log('Running Cron Job');
-          console.log(`the time is ${time}`);
-          console.log(`the ID is ${userTimeId}`);
-
-        /*         const mailOptions = {
-          from: 'Journary <noreply@journary.com>',
-          to: updatedUser.rows[0].email,
-          subject: 'Reminder',
-          html: '<h1>Hi there</h1>, <p>This email was automatically sent by me from Journary to automatically remind you to write a new diary today.</p> <p>To unsubscribe for this reminder, login to the app and turn it off from your profile</p>'
-        };
-        transporter.sendMail(mailOptions, (error, info) => {
-          if (error) {
-            throw error;
-          } else {
-            console.log('Email successfully sent!');
-          }
-        }); */
-        });
-      }
-      /*       if (time === 'Off') {
-        setTimeout(() => {
-          const userJob = schedule.scheduledJobs.userTimeId;
-          userJob.cancel();
-        }, 2000);
-      } */ /* setTimeout(() => {
-        const userJob = schedule.scheduledJobs.userTimeId;
-        userJob.reschedule(time);
-      }, 2000); */
-      return res.status(200).json({
-        success: true,
-        message: 'Diaries found',
-        reminder: updatedUser.rows[0].notification_settings,
-        time
-      });
-    } catch (error) {
-      console.log(error);
       return res.status(400).send(error);
     }
   }
