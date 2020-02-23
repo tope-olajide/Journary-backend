@@ -1,13 +1,15 @@
 {
-  "name": "server",
+  "name": "journary",
   "version": "1.0.0",
-  "description": "",
+  "description": "Online diary wep app",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "babel-node index.js",
     "migrate": "babel-node models/index ",
-    "run": "nodemon --exec babel-node index.js"
+    "dev": "nodemon --exec babel-node index.js",
+    "cron": "babel-node cronTask.js"
+
   },
   "keywords": [],
   "author": "Temitope Olajide",
