@@ -12,6 +12,11 @@ import logger from '../helpers/logger';
 })().catch(err => logger.info(err.message));
 
 (async () => {
+  const res = await schema.createReminders();
+  if (res) logger.info('Reminders table successfully migrated');
+})().catch(err => logger.info(err.message));
+
+(async () => {
   const res = await schema.createImageGalleries();
   if (res) logger.info('ImageGalleries table successfully migrated');
 })().catch(err => logger.info(err.message));

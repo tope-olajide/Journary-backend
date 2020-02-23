@@ -44,4 +44,17 @@ export default {
     `;
     return database.query(entriesSchema);
   },
+  createReminders() {
+    const remindersSchema = `
+    CREATE TABLE IF NOT EXISTS reminders (
+      reminder_id SERIAL PRIMARY KEY,
+      reminder_time TEXT DEFAULT 'Off',
+      task_id TEXT,
+      user_id INTEGER REFERENCES users(user_id),
+      email TEXT,
+      username TEXT
+    );
+    `;
+    return database.query(remindersSchema);
+  },
 };
