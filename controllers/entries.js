@@ -1,12 +1,27 @@
-/* eslint-disable no-console */
-/* eslint-disable require-jsdoc */
 
 import {
   validateEntry
 } from '../middleware/validator';
 import db from '../db';
-
+/**
+ * @description - Class Definition for the Entry Object
+ *
+ * @export
+ *
+ * @class Entry
+ */
 export default class Entry {
+  /**
+   * @description - Creates a new diary entry
+   *
+   * @param {object} req - HTTP Request
+   *
+   * @param {object} res - HTTP Response
+   *
+   * @return {json} Returns json object
+   *
+   * @memberof Entry
+   */
   static async addEntry({
     user,
     body
@@ -41,7 +56,6 @@ export default class Entry {
         rows
       } = await db.query(text, values);
       const entry = rows[0];
-      console.log(entry)
       return res.status(201).json({
         success: true,
         message: 'New Entry created',
@@ -56,6 +70,17 @@ export default class Entry {
     }
   }
 
+  /**
+   * @description - Modifies an entry
+   *
+   * @param {object} req - HTTP Request
+   *
+   * @param {object} res - HTTP Response
+   *
+   * @return {json} Returns json object
+   *
+   * @memberof Entry
+   */
   static async modifyEntry({
     user,
     body,
@@ -106,11 +131,11 @@ export default class Entry {
         isPrivate || rows[0].is_private,
         entryId
       ];
-      const response = await db.query(updateEntryQuery, values);
+      const modifiedEntry = await db.query(updateEntryQuery, values);
       return res.status(200).json({
         success: true,
         message: 'Entry updated successfully',
-        response: response.rows[0]
+        modifiedEntry: modifiedEntry.rows[0]
       });
     } catch (error) {
       return res.status(500).json({
@@ -121,6 +146,16 @@ export default class Entry {
     }
   }
 
+  /**
+   * @description - Delete an entry
+   *
+   * @param {object} req - HTTP Request
+   *
+   * @param {object} res - HTTP Response
+   *
+   * @return {json} Returns json object
+   *
+   */
   static async deleteEntry({
     params,
     user
@@ -157,6 +192,16 @@ export default class Entry {
     }
   }
 
+  /**
+   * @description - View entry details
+   *
+   * @param {object} req - HTTP Request
+   *
+   * @param {object} res - HTTP Response
+   *
+   * @return {json} Returns json object
+   *
+   */
   static async viewEntry({
     params,
     user
@@ -200,6 +245,18 @@ export default class Entry {
     }
   }
 
+  /**
+   * @description - View entry details with no view count.
+   * used to set default input values on the front end
+   * before modifications
+   *
+   * @param {object} req - HTTP Request
+   *
+   * @param {object} res - HTTP Response
+   *
+   * @return {json} Returns json object
+   *
+   */
   static async getEntry({
     params,
     user
@@ -236,6 +293,16 @@ export default class Entry {
     }
   }
 
+  /**
+   * @description - fetches only the private entries belonging to a user
+   *
+   * @param {object} req - HTTP Request
+   *
+   * @param {object} res - HTTP Response
+   *
+   * @return {json} Returns json object
+   *
+   */
   static async getUserPrivateEntries({
     user, query
   }, res) {
@@ -266,6 +333,16 @@ export default class Entry {
     }
   }
 
+  /**
+   * @description - fetches only the public entries belonging to a user
+   *
+   * @param {object} req - HTTP Request
+   *
+   * @param {object} res - HTTP Response
+   *
+   * @return {json} Returns json object
+   *
+   */
   static async getUserPublicEntries({
     user, query
   }, res) {
@@ -296,6 +373,16 @@ export default class Entry {
     }
   }
 
+  /**
+   * @description - fetches all the public entries from the database
+   *
+   * @param {object} req - HTTP Request
+   *
+   * @param {object} res - HTTP Response
+   *
+   * @return {json} Returns json object
+   *
+   */
   static async getAllPublicEntries(req, res) {
     const limit = 10;
     const currentPage = Number(req.query.page) || 1;
@@ -324,6 +411,16 @@ export default class Entry {
     }
   }
 
+  /**
+   * @description - Search for entry
+   *
+   * @param {object} req - HTTP Request
+   *
+   * @param {object} res - HTTP Response
+   *
+   * @return {json} Returns json object
+   *
+   */
   static async searchEntries({
     query,
     user
