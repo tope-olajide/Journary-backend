@@ -1,27 +1,30 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable require-jsdoc */
-import schedule from 'node-schedule';
-import nodemailer from 'nodemailer';
 import jsonwebtoken from 'jsonwebtoken';
 import db from '../db';
 import validateUser from '../utils/validateSignUpData';
 import validateModifiedUser from '../utils/validateModifiedUserData';
 import Encryption from '../middleware/encryption';
 import config from '../config/config';
-import scheduleTask, { cancelTask } from '../utils/scheduler';
 
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true,
-  auth: {
-    user: config.email,
-    pass: config.password
-  }
-});
 const newEncryption = new Encryption();
-
+/**
+ * @description - Class Definition for the User Object
+ *
+ * @export
+ *
+ * @class User
+ */
 export default class User {
+  /**
+   * @description - Creates a new user
+   *
+   * @param {object} req - HTTP Request
+   *
+   * @param {object} res - HTTP Response
+   *
+   * @return {json} Returns json object
+   *
+   * @memberof User
+   */
   static async signupUser(req, res) {
     const {
       fullname,
@@ -94,6 +97,17 @@ export default class User {
     }
   }
 
+  /**
+   * @description - sign in user
+   *
+   * @param {object} req - HTTP Request
+   *
+   * @param {object} res - HTTP Response
+   *
+   * @return {json} Returns json object
+   *
+   * @memberof User
+   */
   static async signInUser(req, res) {
     const { authName } = req.body;
     const text = 'SELECT * FROM users WHERE username = $1 OR email =$1';
@@ -137,6 +151,17 @@ export default class User {
     }
   }
 
+  /**
+   * @description - Modifies user
+   *
+   * @param {object} req - HTTP Request
+   *
+   * @param {object} res - HTTP Response
+   *
+   * @return {json} Returns json object
+   *
+   * @memberof User
+   */
   static async modifyUser({
     body,
     user
@@ -206,6 +231,17 @@ export default class User {
     }
   }
 
+  /**
+   * @description - Fetch user profile
+   *
+   * @param {object} req - HTTP Request
+   *
+   * @param {object} res - HTTP Response
+   *
+   * @return {json} Returns json object
+   *
+   * @memberof User
+   */
   static async getUser({
     user
   }, res) {
