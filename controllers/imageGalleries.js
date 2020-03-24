@@ -1,5 +1,4 @@
-/* eslint-disable no-console */
-/* eslint-disable require-jsdoc */
+
 import cloudinary from 'cloudinary';
 import db from '../db';
 
@@ -10,7 +9,28 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_KEY,
   api_secret: process.env.CLOUDINARY_SECRET
 });
+/**
+ * @description - Class Definition for the ImageGallery Object
+ *
+ * @export
+ *
+ * @class ImageGallery
+ */
 export default class ImageGallery {
+  /**
+   * @description - Saves image url.
+   * Image has already been uploaded to cloudinary on the frontend.
+   * cloundinary returns the url of the image.
+   * this methods save the url into the database
+   *
+   * @param {object} req - HTTP Request
+   *
+   * @param {object} res - HTTP Response
+   *
+   * @return {json} Returns json object
+   *
+   * @memberof ImageGallery
+   */
   static async saveImageUrl({
     user,
     body
@@ -46,6 +66,17 @@ export default class ImageGallery {
     }
   }
 
+  /**
+   * @description - Fetches the all the images belonging to a user from the DB
+   *
+   * @param {object} req - HTTP Request
+   *
+   * @param {object} res - HTTP Response
+   *
+   * @return {json} Returns json object
+   *
+   * @memberof ImageGallery
+   */
   static async fetchImageGallery({
     user
   }, res) {
@@ -76,6 +107,17 @@ export default class ImageGallery {
     }
   }
 
+  /**
+   * @description - Delete imageUrl from database and Image from cloudinary
+   *
+   * @param {object} req - HTTP Request
+   *
+   * @param {object} res - HTTP Response
+   *
+   * @return {json} Returns json object
+   *
+   * @memberof ImageGallery
+   */
   static async deleteImage({
     params,
     user
