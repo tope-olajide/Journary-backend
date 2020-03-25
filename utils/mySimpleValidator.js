@@ -1,4 +1,4 @@
-const verifyInteger = char => {
+const verifyInteger = (char) => {
   const integer = char.toString();
   const code = integer.charCodeAt(0);
   if (code > 47 && code < 58) {
@@ -7,7 +7,7 @@ const verifyInteger = char => {
   }
   return false;
 };
-const verifyString = char => {
+const verifyString = (char) => {
   const integer = char.toString();
   const code = integer.charCodeAt(0);
   if ((code > 96 && code < 123) || (code > 64 && code < 91)) {
@@ -16,16 +16,16 @@ const verifyString = char => {
   }
   return false;
 };
-const verifyMailCharacter = char => {
+const verifyMailCharacter = (char) => {
   char = char.toString();
   const code = char.charCodeAt(0);
   if (
-    code !== 45 &&
-    code !== 46 &&
-    code !== 64 &&
-    code !== 95 &&
-    !verifyString(char) &&
-    !verifyInteger(char)
+    code !== 45
+    && code !== 46
+    && code !== 64
+    && code !== 95
+    && !verifyString(char)
+    && !verifyInteger(char)
   ) {
     return false;
   }
@@ -33,7 +33,7 @@ const verifyMailCharacter = char => {
 };
 export const validateIntegers = (
   integer,
-  fieldName = "numbers",
+  fieldName = 'numbers',
   minLength = 1,
   maxLength = 300
 ) => {
@@ -44,7 +44,7 @@ export const validateIntegers = (
     ];
   }
   const int = integer.toString();
-  const intArray = int.split("");
+  const intArray = int.split('');
   if (intArray.length < minLength || intArray.length > maxLength) {
     return [
       false,
@@ -61,7 +61,7 @@ export const validateIntegers = (
 
 export const validateOnlyStringChars = (
   strings,
-  fieldName = "string",
+  fieldName = 'string',
   minLength = 1,
   maxLength = 300
 ) => {
@@ -72,7 +72,7 @@ export const validateOnlyStringChars = (
     ];
   }
   strings = strings.toString();
-  const stringArray = strings.split("");
+  const stringArray = strings.split('');
   if (stringArray.length < minLength || stringArray.length > maxLength) {
     return [
       false,
@@ -88,7 +88,7 @@ export const validateOnlyStringChars = (
 };
 export const validateInputCharLength = (
   string,
-  fieldName = "string",
+  fieldName = 'string',
   minLength = 1,
   maxLength = 300
 ) => {
@@ -110,18 +110,18 @@ export const validateInputCharLength = (
 
 export const validateEmailAddress = (email, minLength = 1, maxLength = 300) => {
   if (!email) {
-    return [false, "Invalid email address"];
+    return [false, 'Invalid email address'];
   }
   email = email.toString();
-  const emailArray = email.split("");
+  const emailArray = email.split('');
   // email address must contain @ and dot sign e.i .com or .com.ng
-  if (emailArray.indexOf("@") === -1 || email.indexOf(".") === -1) {
-    return [false, "Invalid email address"];
+  if (emailArray.indexOf('@') === -1 || email.indexOf('.') === -1) {
+    return [false, 'Invalid email address'];
   }
   // email address must not contain 2 or more @ signs
-  const newMailArray = email.split("@");
+  const newMailArray = email.split('@');
   if (newMailArray.length > 2) {
-    return [false, "Invalid email address"];
+    return [false, 'Invalid email address'];
   }
   if (emailArray.length < minLength || emailArray.length > maxLength) {
     return [
@@ -131,29 +131,29 @@ export const validateEmailAddress = (email, minLength = 1, maxLength = 300) => {
   }
   for (let i = 0, len = emailArray.length; i < len; i += 1) {
     if (!verifyMailCharacter(emailArray[i])) {
-      return [false, "Invalid email address"];
+      return [false, 'Invalid email address'];
     }
   }
   /* the only special characters allowed
 (@ _ - . ) must not follow each other consecutively e.g, -- or __ or .. */
   if (
-    emailArray[emailArray.indexOf(".") + 1] === "." ||
-    emailArray[emailArray.indexOf("_") + 1] === "_" ||
-    emailArray[emailArray.indexOf("-") + 1] === "-"
+    emailArray[emailArray.indexOf('.') + 1] === '.'
+    || emailArray[emailArray.indexOf('_') + 1] === '_'
+    || emailArray[emailArray.indexOf('-') + 1] === '-'
   ) {
-    return [false, "Invalid email address"];
+    return [false, 'Invalid email address'];
   }
   /* no special character must immediately follow the @ sign */
   if (
-    emailArray[emailArray.indexOf("@") + 1] === "." ||
-    emailArray[emailArray.indexOf("@") + 1] === "_" ||
-    emailArray[emailArray.indexOf("@") + 1] === "-"
+    emailArray[emailArray.indexOf('@') + 1] === '.'
+    || emailArray[emailArray.indexOf('@') + 1] === '_'
+    || emailArray[emailArray.indexOf('@') + 1] === '-'
   ) {
-    return [false, "Invalid email address"];
+    return [false, 'Invalid email address'];
   }
   const code = emailArray[0].charCodeAt(0);
   if (code === 45 || code === 46 || code === 64 || code === 95) {
-    return [false, "Invalid email address"];
+    return [false, 'Invalid email address'];
   }
   return true;
 };
