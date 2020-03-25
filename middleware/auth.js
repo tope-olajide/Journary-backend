@@ -25,10 +25,10 @@ export default class Auth {
   verify(req, res, next) {
     const token = req.body.token
       || req.query.token
-      || req.headers['authorization'];
+      || req.headers.authorization;
 
     if (token) {
-      const jwtSecret = config.jwtSecret;
+      const { jwtSecret } = config;
       jasonwebtoken.verify(token, jwtSecret, (err, decoded) => {
         if (err) {
           return res.status(401).json({
