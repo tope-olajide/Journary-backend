@@ -33,10 +33,9 @@ const scheduler = (time, username, email) => cron.schedule(time, () => {
 });
 const scheduleTask = (taskId, time, username, email) => {
   allTask[taskId] = scheduler(time, username, email);
-  
 };
-export function cancelTask(taskId) {
+export const cancelTask = (taskId) => {
   allTask[taskId].destroy();
   console.log(allTask);
-}
+};
 export default scheduleTask;
