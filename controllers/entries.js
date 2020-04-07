@@ -306,7 +306,7 @@ export default class Entry {
   static async getUserPrivateEntries({
     user, query
   }, res) {
-    const limit = 7;
+    const limit = 10;
     const currentPage = Number(query.page) || 1;
     const offset = (currentPage - 1) * limit; const userId = user.id;
     const text = 'SELECT entry_id,title,entry_image_url,content,view_count FROM entries  WHERE is_private =$1 and user_id =$4 LIMIT $2 OFFSET $3';
@@ -346,7 +346,7 @@ export default class Entry {
   static async getUserPublicEntries({
     user, query
   }, res) {
-    const limit = 7;
+    const limit = 10;
     const currentPage = Number(query.page) || 1;
     const offset = (currentPage - 1) * limit; const userId = user.id;
     const text = 'SELECT entry_id,title,entry_image_url,content,view_count FROM entries  WHERE is_private =$1 and user_id =$4 LIMIT $2 OFFSET $3';
@@ -389,6 +389,7 @@ export default class Entry {
     const offset = (currentPage - 1) * limit;
     const text = 'SELECT entry_id,title,entry_image_url,content,username,view_count FROM entries INNER JOIN users ON users.user_id = entries.user_id WHERE is_private =$1 LIMIT $2 OFFSET $3';
     const values = ['false', limit, offset];
+    const countAllPublicEntries = 'SELECT COUNT(*) FROM entries WHERE is_private =$1';
     try {
       const {
         rows
@@ -400,11 +401,14 @@ export default class Entry {
           entries: []
         });
       }
+      const totalEntries = await db.query(countAllPublicEntries, ['false']);
+      console.log(totalEntries);
       return res.status(200).json({
         success: true,
         message: 'Diaries found',
         entries: rows,
-        currentPage
+        currentPage,
+        totalEntries: totalEntries.rows
       });
     } catch (error) {
       return res.status(400).send(error);
