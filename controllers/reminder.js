@@ -81,14 +81,25 @@ export default class Reminder {
         });
       }
       const userExist = await db.query(searchForUser, [username]);
-
       if (userExist.rows[0]) {
+        if (!scheduleTask(taskId, time, username, email)) {
+          return res.status(400).json({
+            success: false,
+            message: 'Unable to connect to the SMPT server'
+          });
+        }
         await db.query(updateReminderSettings, value3);
         scheduleTask(taskId, time, username, email);
         return res.status(200).json({
           success: true,
           message: 'Email Reminder Updated Successfully',
           time
+        });
+      }
+      if (!scheduleTask(taskId, time, username, email)) {
+        return res.status(400).json({
+          success: false,
+          message: 'Unable to connect to the SMPT server'
         });
       }
       await db.query(saveReminderSettings, values);
@@ -138,7 +149,7 @@ export default class Reminder {
   }
 
   /**
-   * @description - Restart all the reminders
+   * @description - Restarts all the reminders
    * incase the app crashed or stopped working
    *
    * @param {object} req - HTTP Request

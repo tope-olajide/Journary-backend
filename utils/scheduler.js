@@ -25,13 +25,15 @@ const scheduler = (time, username, email) => cron.schedule(time, () => {
   };
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      throw error;
-    } else {
-      console.log('Email successfully sent!');
+      return false;
     }
+    console.log('Email successfully sent!');
   });
 });
 const scheduleTask = (taskId, time, username, email) => {
+  if (!scheduler(time, username, email)) {
+    return false;
+  }
   allTask[taskId] = scheduler(time, username, email);
 };
 export const cancelTask = (taskId) => {
